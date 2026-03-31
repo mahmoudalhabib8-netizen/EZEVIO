@@ -14,11 +14,11 @@ export default function PrivacyPage() {
       <div className="t-default t-about">
         <div className="o-container">
           <div className="o-grid content">
-            <div className="o-col-3--xlg u-push-3--xlg o-col-6--md o-col-12">
+            <div className="o-col-3--xlg u-push-3--xlg o-col-6--md o-col-12 dumbar-col-stack">
               <h3 data-aos="topleft-hardscale">Privacy Policy</h3>
             </div>
             <div
-              className="o-col-6--xlg u-push-3--xlg o-col-6--md o-col-12"
+              className="o-col-6--xlg u-push-3--xlg o-col-6--md o-col-12 dumbar-col-stack"
               data-aos="topleft-hardscale"
             >
               <p>

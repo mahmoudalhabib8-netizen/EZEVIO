@@ -1041,6 +1041,16 @@ section.projects .project [data-project-title] a:hover {
   color: #ffffff;
 }
 
+/* Inline links in body copy (e.g. privacy): keep flow; don’t stack like block CTAs. */
+.t-about p a,
+.t-services p a,
+.t-jobs p a {
+  margin-top: 0;
+  display: inline;
+  font-size: inherit;
+  line-height: inherit;
+}
+
 .t-about a.about-link,
 .t-services a.about-link,
 .t-jobs a.about-link {
