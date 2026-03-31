@@ -3,7 +3,7 @@ import type { ServiceSection } from "@/lib/dumbarCopy";
 
 type Props = {
   section: ServiceSection | { heading: string; body: string; cta?: ServiceSection["cta"] };
-  /** studiodumbar services: first row step-1, following rows step-2 */
+  /** First row uses step-1, following rows step-2 (services + about body sections). */
   serviceRevealStep?: 1 | 2;
 };
 

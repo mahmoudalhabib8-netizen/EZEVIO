@@ -14,11 +14,14 @@ export default function PrivacyPage() {
         <div className="o-container">
           <div className="o-grid content">
             <div className="mega-title-wrap o-col-12--md o-col-12">
-              <h2 className="mega-title" data-aos="topleft-hardscale">
-                Privacy
+              <h2 className="mega-title">
+                <span data-aos="topleft-hardscale-steps">Privacy</span>
               </h2>
             </div>
-            <section className="o-grid">
+            <section
+              className="o-grid"
+              data-aos="topleft-hardscale-service-step-1"
+            >
               <div className="o-col-12 dumbar-col-stack">
                 <h3>Summary</h3>
                 <p>

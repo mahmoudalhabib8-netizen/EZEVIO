@@ -13,7 +13,10 @@ export default function ContactPage() {
       <div className="t-default t-contact">
         <div className="o-container">
           <div className="o-grid content">
-            <div className="contact-section o-col-6--md o-col-12 dumbar-col-stack">
+            <div
+              className="contact-section o-col-6--md o-col-12 dumbar-col-stack"
+              data-aos="topleft-hardscale-service-step-1"
+            >
               <p>
                 New work &amp; general inquiries
                 <br />
@@ -36,7 +39,10 @@ export default function ContactPage() {
                 <Link href="/privacy">Privacy</Link>
               </p>
             </div>
-            <div className="o-col-6--md o-col-12 dumbar-col-stack">
+            <div
+              className="o-col-6--md o-col-12 dumbar-col-stack"
+              data-aos="topleft-hardscale-service-step-2"
+            >
               <p>Studio</p>
               <p>
                 <a

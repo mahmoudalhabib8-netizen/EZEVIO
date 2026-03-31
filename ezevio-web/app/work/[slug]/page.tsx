@@ -38,7 +38,10 @@ export default async function WorkCasePage({ params }: Props) {
       <div className="t-default t-about">
         <div className="o-container">
           <div className="o-grid content">
-            <div className="o-col-12 dumbar-col-stack">
+            <div
+              className="o-col-12 dumbar-col-stack"
+              data-aos="topleft-hardscale-service-step-1"
+            >
               <h3>{tile.title}</h3>
               <p>
                 Case study placeholder — swap for real content, gallery, or
