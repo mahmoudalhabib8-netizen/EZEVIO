@@ -62,7 +62,7 @@ export function WorkGrid({ tiles }: { tiles: readonly Tile[] }) {
       {tiles.map((item) => (
         <div
           key={item.href}
-          className="project-link o-col-12 o-col-6--md o-col-4--xlg"
+          className="project-link work-project-card o-col-12 o-col-6--md"
           data-aos-offset="50"
           data-aos="center-hardscale-work_page"
         >

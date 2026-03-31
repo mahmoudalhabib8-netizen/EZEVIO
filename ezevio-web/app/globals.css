@@ -1189,6 +1189,19 @@ section.projects .project [data-project-title] a:hover {
   min-width: 0;
 }
 
+.t-work .work-project-card {
+  box-sizing: border-box;
+  background-color: #efede6;
+  padding: 14px 14px 18px;
+  border-radius: 4px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-work .work-project-card {
+    padding: 18px 18px 22px;
+  }
+}
+
 @media only screen and (min-width: 64em) {
   .t-work .project-link {
     margin-bottom: 120px;
@@ -1230,13 +1243,17 @@ section.projects .project [data-project-title] a:hover {
   background-color: #000000;
 }
 
+.t-work .work-project-card figure .videogif {
+  background-color: #e6e4dc;
+}
+
 .t-work .project-link figcaption {
   transition: transform 0.3s cubic-bezier(1, 0, 1, 1);
   transform-origin: top left;
 }
 
 @media only screen and (min-width: 64em) {
-  .t-work .project-link figcaption {
+  .t-work .project-link:not(.work-project-card) figcaption {
     position: absolute;
     left: 0;
     right: 0;
@@ -1244,6 +1261,19 @@ section.projects .project [data-project-title] a:hover {
     padding: 10px;
     margin: 0;
     pointer-events: none;
+  }
+}
+
+.t-work .work-project-card figcaption {
+  position: static;
+  padding: 14px 2px 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-work .work-project-card figcaption {
+    padding: 18px 4px 0;
   }
 }
 
@@ -1268,6 +1298,15 @@ section.projects .project [data-project-title] a:hover {
 
 .t-work .project-link:hover .figcaption-caption {
   color: #ffffff;
+}
+
+.t-work .work-project-card .figcaption-caption {
+  color: #1a1a1a;
+  line-height: 1.25;
+}
+
+.t-work .work-project-card:hover .figcaption-caption {
+  color: #000000;
 }
 
 /* studiodumbar .t-contact */
