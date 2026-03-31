@@ -1,19 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { InnerPageShell } from "@/components/InnerPageShell";
 import { docTitle } from "@/lib/siteMeta";
 
 export const metadata: Metadata = {
   title: docTitle("Not found"),
 };
 
+/**
+ * studiodumbar.com returns an empty 404 from nginx; we use the same inner-page
+ * chrome and two-column t-about grid as their privacy/legal layout.
+ */
 export default function NotFound() {
   return (
-    <div className="theme-dark min-h-dvh flex flex-col items-center justify-center gap-4 p-6 text-center">
-      <p className="text-sm opacity-80">404</p>
-      <h1 className="text-xl font-medium">This page could not be found.</h1>
-      <Link href="/" className="underline underline-offset-4">
-        Back to EZEVIO
-      </Link>
-    </div>
+    <InnerPageShell>
+      <div className="t-default t-about">
+        <div className="o-container">
+          <div className="o-grid content">
+            <div className="o-col-3--xlg u-push-3--xlg o-col-6--md o-col-12">
+              <h3 data-aos="topleft-hardscale">404</h3>
+            </div>
+            <div
+              className="o-col-6--xlg u-push-3--xlg o-col-6--md o-col-12"
+              data-aos="topleft-hardscale"
+            >
+              <p>This page could not be found.</p>
+              <p>
+                <Link href="/">Back to EZEVIO</Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </InnerPageShell>
   );
 }
