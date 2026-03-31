@@ -35,19 +35,12 @@ export default async function WorkCasePage({ params }: Props) {
 
   return (
     <InnerPageShell>
-      <div className="t-default t-about">
+      <div className="t-default">
         <div className="o-container">
           <div className="o-grid content">
-            <div
-              className="o-col-12 dumbar-col-stack"
-              data-aos="topleft-hardscale-service-step-1"
-            >
-              <h3>{tile.title}</h3>
-              <p>
-                Case study placeholder — swap for real content, gallery, or
-                embeds.
-              </p>
-              <p>
+            <div className="o-col-12 work-case-coming-soon">
+              <p>Coming Soon.</p>
+              <p className="work-case-coming-soon__back">
                 <Link href="/work">Back to work</Link>
               </p>
             </div>

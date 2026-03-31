@@ -14,7 +14,7 @@ export default function ContactPage() {
         <div className="o-container">
           <div className="o-grid content">
             <div
-              className="contact-section o-col-6--md o-col-12 dumbar-col-stack"
+              className="contact-section o-col-12 dumbar-col-stack"
               data-aos="topleft-hardscale-service-step-1"
             >
               <p>
@@ -37,30 +37,6 @@ export default function ContactPage() {
                 Company details, contracts, and tax IDs: on request.
                 <br />
                 <Link href="/privacy">Privacy</Link>
-              </p>
-            </div>
-            <div
-              className="o-col-6--md o-col-12 dumbar-col-stack"
-              data-aos="topleft-hardscale-service-step-2"
-            >
-              <p>Studio</p>
-              <p>
-                <a
-                  href="https://maps.google.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Add your address
-                  <br />
-                  City, region / postcode
-                  <br />
-                  Country
-                </a>
-              </p>
-              <p>
-                <a href="https://www.instagram.com">Instagram</a>
-                <br />
-                <a href="https://www.linkedin.com">LinkedIn</a>
               </p>
             </div>
           </div>

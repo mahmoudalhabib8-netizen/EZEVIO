@@ -11,6 +11,8 @@ function navPathActive(pathname: string, href: string) {
   const h = href.replace(/\/$/, "") || "/";
   /** `/` is Services landing; `/services` is the same page for bookmarks. */
   if (h === "/" && (p === "/" || p === "/services")) return true;
+  /** `/work` + any case URL (`/work/slug`) keep Work highlighted. */
+  if (h === "/work" && (p === "/work" || p.startsWith("/work/"))) return true;
   return p === h;
 }
 

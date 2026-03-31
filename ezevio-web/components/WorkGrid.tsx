@@ -7,7 +7,7 @@ type Tile = {
   title: string;
 };
 
-/** Work index: white placeholder cards (no media) + project titles. */
+/** Work index: white tile + title on page background. */
 export function WorkGrid({ tiles }: { tiles: readonly Tile[] }) {
   return (
     <>
@@ -19,14 +19,12 @@ export function WorkGrid({ tiles }: { tiles: readonly Tile[] }) {
           data-aos="center-hardscale-work_page"
         >
           <Link href={item.href}>
-            <div className="work-project-card">
-              <figure className="figure-video">
-                <div className="work-card-filler" aria-hidden />
-                <figcaption>
-                  <span className="figcaption-caption">{item.title}</span>
-                </figcaption>
-              </figure>
-            </div>
+            <figure className="figure-video">
+              <div className="work-card-filler" aria-hidden />
+              <figcaption>
+                <span className="figcaption-caption">{item.title}</span>
+              </figcaption>
+            </figure>
           </Link>
         </div>
       ))}

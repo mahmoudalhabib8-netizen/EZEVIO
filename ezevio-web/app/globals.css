@@ -74,10 +74,13 @@ html.menu-is-open section.projects {
   opacity: 0;
 }
 
+/*
+ * Do not set transform here: any transform on an ancestor makes position:fixed
+ * descendants stick to that box instead of the viewport (nav would scroll away).
+ */
 .home-scroll-shell,
 .dumbar-inner-shell {
   opacity: 1;
-  transform: scale(1);
   transition: transform 0.2s cubic-bezier(0, 0, 0, 1), opacity 0s linear;
 }
 
@@ -127,7 +130,7 @@ html.menu-is-open .dumbar-inner-shell > footer.c-footer {
 
 @media only screen and (min-width: 64em) {
   html.menu-is-open .home-scroll-shell {
-    transform: scale(1);
+    transform: none;
     opacity: 1;
     pointer-events: auto;
   }
@@ -203,6 +206,20 @@ svg {
   align-items: flex-start;
 }
 
+/*
+ * Mobile / tablet: slightly larger mark only. Menu toggle is position:fixed — do not change
+ * nav flex alignment or min-heights or it drifts from the icon.
+ */
+@media only screen and (max-width: 63.96875em) {
+  header nav .header__logo-mark .header__logo-default,
+  header nav .header__logo-mark .header__logo-transition,
+  .home-header nav .header__logo-mark .header__logo-default,
+  .home-header nav .header__logo-mark .header__logo-transition {
+    height: 20px;
+    width: auto;
+  }
+}
+
 @media only screen and (min-width: 64em) {
   header:not(.home-header) nav.inner-nav {
     justify-content: space-between;
@@ -237,30 +254,31 @@ header,
 .home-header {
   padding: 20px 0;
   top: 0;
+  left: 0;
   z-index: 3;
   width: 100%;
   font-size: 15px;
   color: #ffffff;
-  position: absolute;
+  position: fixed;
   pointer-events: none;
-  mix-blend-mode: difference;
+  mix-blend-mode: normal;
+}
+
+/*
+ * Inner routes: bar defaults to muted gray so links never inherit #fff from `a { color: inherit }`.
+ */
+header:not(.home-header) {
+  color: #868686;
 }
 
 @media only screen and (max-width: 63.96875em) {
   header,
   .home-header {
     z-index: 20;
+    /* Match .menu-toggle padding (23px) so logo & icon share the same inset from the viewport top. */
+    padding-top: 23px;
+    padding-bottom: 20px;
   }
-}
-
-/* Inner routes: solid nav colors; current link reads as true white (no blend inversion). */
-html.theme-dark header:not(.home-header),
-html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .hamburger-inner,
-html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::before,
-html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::after,
-html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .close-inner::before,
-html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .close-inner::after {
-  mix-blend-mode: normal;
 }
 
 @media screen and (min-width: 480px) {
@@ -280,7 +298,6 @@ html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-
 @media only screen and (min-width: 64em) {
   header,
   .home-header {
-    position: fixed;
     padding: 15px 0;
   }
 }
@@ -295,7 +312,7 @@ html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-
 
 header nav .header__logo,
 .home-header nav .header__logo {
-  position: fixed;
+  position: relative;
   padding-top: 5px;
   color: #868686;
   height: auto;
@@ -306,11 +323,22 @@ header nav .header__logo,
   overflow: visible;
 }
 
-@media only screen and (min-width: 64em) {
+@media only screen and (max-width: 63.96875em) {
   header nav .header__logo,
   .home-header nav .header__logo {
-    position: relative;
+    padding-top: 0;
   }
+}
+
+/* Home reel only: logo inverts over light & dark frames (after base logo so it wins). */
+.home-header nav .header__logo {
+  mix-blend-mode: difference;
+  color: #ffffff;
+}
+
+.home-header nav .header__logo:hover,
+.home-header nav .header__logo:focus-visible {
+  color: #ffffff;
 }
 
 /* Logo: full white idle (bar mark); hover crossfades to ezevio-logo-transition.svg */
@@ -535,6 +563,7 @@ header nav:not(.mobile-menu) ul,
 header nav:not(.mobile-menu) ul a,
 .home-header nav:not(.mobile-menu) ul a {
   color: #868686;
+  mix-blend-mode: normal;
   cursor: pointer;
   line-height: 1;
   pointer-events: all;
@@ -552,14 +581,22 @@ header nav:not(.mobile-menu) ul a[aria-current="page"],
   color: #ffffff;
 }
 
+/* Homepage reel: same as inner — gray idle, white hover + current route. */
 .homepage header nav:not(.mobile-menu) ul a,
 .homepage .home-header nav:not(.mobile-menu) ul a {
-  color: #ffffff;
+  color: #868686;
 }
 
 .homepage header nav:not(.mobile-menu) ul a:hover,
 .homepage .home-header nav:not(.mobile-menu) ul a:hover {
-  color: #868686;
+  color: #ffffff;
+}
+
+.homepage header nav:not(.mobile-menu) ul a.active,
+.homepage .home-header nav:not(.mobile-menu) ul a.active,
+.homepage header nav:not(.mobile-menu) ul a[aria-current="page"],
+.homepage .home-header nav:not(.mobile-menu) ul a[aria-current="page"] {
+  color: #ffffff;
 }
 
 header .mobile-menu,
@@ -848,11 +885,19 @@ section.projects .project [data-project-title] a:hover {
   flex: 1 0 auto;
   width: 100%;
   min-width: 0;
+  position: relative;
+  z-index: 1;
 }
 
 /* studiodumbar .t-default — clears fixed header; do not add extra page-inner padding on top. */
 .t-default {
   padding-top: 120px;
+}
+
+/* Services: page content above the fixed rocket layer (rocket is z-index 0 inside main). */
+.t-default.t-services {
+  position: relative;
+  z-index: 1;
 }
 
 @media only screen and (min-width: 64em) {
@@ -882,6 +927,41 @@ section.projects .project [data-project-title] a:hover {
 
 .content a:hover {
   color: #ffffff;
+}
+
+/* Work /[slug]: centered copy, same scale as body text */
+.work-case-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: min(62dvh, 520px);
+  padding: 24px 0 64px;
+  margin: 0;
+  color: #868686;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+@media screen and (min-width: 480px) {
+  .work-case-coming-soon {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .work-case-coming-soon {
+    font-size: 20px;
+  }
+}
+
+.work-case-coming-soon p {
+  margin: 0;
+}
+
+.work-case-coming-soon__back {
+  margin-top: 1.25em;
 }
 
 /* studiodumbar .t-about / .t-services / .t-jobs typography */
@@ -1021,6 +1101,51 @@ section.projects .project [data-project-title] a:hover {
 .t-services .mega-title span {
   display: inline-flex;
 }
+
+/*
+ * Services: rocket flyover (disabled — uncomment + ServicesPageRocket in ServicesPageView to restore).
+ *
+.services-rocket-fly {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.services-rocket-fly__img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: min(104px, 24vw);
+  height: auto;
+  opacity: 0;
+  animation: services-rocket-flight 4.35s cubic-bezier(0.38, 0.02, 0.24, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-rocket-fly {
+    display: none !important;
+  }
+}
+
+@keyframes services-rocket-flight {
+  0% {
+    transform: translate3d(-8vw, 102vh, 0) rotate(-6deg);
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.85;
+  }
+  78% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(102vw, -12vh, 0) rotate(5deg);
+    opacity: 0;
+  }
+}
+*/
 
 .t-about section,
 .t-services section,
@@ -1189,19 +1314,6 @@ section.projects .project [data-project-title] a:hover {
   min-width: 0;
 }
 
-.t-work .work-project-card {
-  box-sizing: border-box;
-  background-color: #ffffff;
-  padding: 14px 14px 18px;
-  border-radius: 4px;
-}
-
-@media only screen and (min-width: 64em) {
-  .t-work .work-project-card {
-    padding: 18px 18px 22px;
-  }
-}
-
 @media only screen and (min-width: 64em) {
   .t-work .project-link {
     margin-bottom: 120px;
@@ -1239,13 +1351,8 @@ section.projects .project [data-project-title] a:hover {
   width: 100%;
   max-width: 100%;
   display: block;
-  background-color: #ffffff;
+  background-color: #e2e2e2;
   box-sizing: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.07);
-}
-
-.t-work .work-project-card:hover .work-card-filler {
-  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .t-work .project-link figure .videogif {
@@ -1257,54 +1364,34 @@ section.projects .project [data-project-title] a:hover {
   background-color: #000000;
 }
 
-.t-work .project-link figcaption {
+/* studiodumbar work index: figcaption uses body type (not .t-work h3 scale). */
+.t-work .project-link figure figcaption {
+  position: static;
+  width: 100%;
+  padding: 10px 0 0;
+  margin: 0;
+  pointer-events: none;
   transition: transform 0.3s cubic-bezier(1, 0, 1, 1);
   transform-origin: top left;
 }
 
-.t-work .work-project-card figcaption {
-  position: static;
-  padding: 14px 2px 0;
-  margin: 0;
-  pointer-events: none;
-}
-
 @media only screen and (min-width: 64em) {
-  .t-work .work-project-card figcaption {
-    padding: 18px 4px 0;
+  .t-work .project-link figure figcaption {
+    padding-top: 15px;
   }
 }
 
 .t-work .project-link .figcaption-caption {
   display: block;
-  font-size: 18.75px;
-  line-height: 1.2;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
   transition: color 0.3s cubic-bezier(1, 0, 1, 1);
-}
-
-@media screen and (min-width: 480px) {
-  .t-work .project-link .figcaption-caption {
-    font-size: calc(18.75px + 11.25 * (100vw - 480px) / 760);
-  }
-}
-
-@media screen and (min-width: 1240px) {
-  .t-work .project-link .figcaption-caption {
-    font-size: 30px;
-  }
 }
 
 .t-work .project-link:hover .figcaption-caption {
   color: #ffffff;
-}
-
-.t-work .work-project-card .figcaption-caption {
-  color: #1a1a1a;
-  line-height: 1.25;
-}
-
-.t-work .work-project-card:hover .figcaption-caption {
-  color: #000000;
 }
 
 /* studiodumbar .t-contact */

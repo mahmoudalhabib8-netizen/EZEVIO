@@ -64,14 +64,14 @@ export const ABOUT_SECTIONS: { heading: string; body: string }[] = [
   },
 ];
 
-/** Work index: titles + routes for `/work` and `/work/[slug]` (visuals are placeholders in UI). */
+/** Work index: titles + routes for `/work` and `/work/[slug]`. */
 export const WORK_TILES: {
   href: string;
   title: string;
 }[] = [
   { href: "/work/nuerlo", title: "NUERLO – AI Course Marketplace" },
   { href: "/work/tathor", title: "TATHOR – AI Business Intelligence" },
-  { href: "/work/class-ace", title: "CLASS ACE – Assignment & test prep" },
+  { href: "/work/class-ace", title: "GETACED – Assignment & test prep" },
   { href: "/work/branory", title: "BRANORY – Food & cuisine restaurant" },
 ];
 
