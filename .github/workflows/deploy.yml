@@ -1,0 +1,62 @@
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: ezevio-web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ezevio-web
+        run: npm ci
+
+      - name: Build and export
+        working-directory: ezevio-web
+        env:
+          NEXT_PUBLIC_BASE_PATH: /EZEVIO
+        run: npm run build
+
+      # Next.js static export does not prefix every root-absolute public URL when basePath is set;
+      # GitHub project pages are served under /EZEVIO/, so patch HTML/CSS before upload.
+      - name: Patch asset URLs for GitHub Pages base path
+        working-directory: ezevio-web
+        run: |
+          find out -name '*.html' -exec sed -i 's|"/ezevio-logo|"/EZEVIO/ezevio-logo|g' {} +
+          find out -name '*.css' -exec sed -i 's|url(/fonts/|url(/EZEVIO/fonts/|g' {} +
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ezevio-web/out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
