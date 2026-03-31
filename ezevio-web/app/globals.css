@@ -319,6 +319,13 @@ header nav .header__logo img,
   height: 13px;
   width: auto;
   display: block;
+  opacity: 0.68;
+  filter: brightness(0.92);
+  transform-origin: left center;
+  transition:
+    opacity 0.45s cubic-bezier(0, 0, 0, 1),
+    filter 0.45s cubic-bezier(0, 0, 0, 1),
+    transform 0.45s cubic-bezier(0, 0, 0, 1);
 }
 
 @media only screen and (min-width: 30em) {
@@ -339,9 +346,42 @@ header nav .header__logo img,
   }
 }
 
+header nav .header__logo:hover svg,
+header nav .header__logo:hover img,
+.home-header nav .header__logo:hover svg,
+.home-header nav .header__logo:hover img,
+header nav .header__logo:focus-visible svg,
+header nav .header__logo:focus-visible img,
+.home-header nav .header__logo:focus-visible svg,
+.home-header nav .header__logo:focus-visible img {
+  opacity: 1;
+  filter: brightness(1);
+  transform: scale(1.02);
+}
+
 header nav .header__logo:hover,
 .home-header nav .header__logo:hover {
   color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header nav .header__logo svg,
+  header nav .header__logo img,
+  .home-header nav .header__logo svg,
+  .home-header nav .header__logo img {
+    transition-duration: 0.01ms;
+  }
+
+  header nav .header__logo:hover svg,
+  header nav .header__logo:hover img,
+  .home-header nav .header__logo:hover svg,
+  .home-header nav .header__logo:hover img,
+  header nav .header__logo:focus-visible svg,
+  header nav .header__logo:focus-visible img,
+  .home-header nav .header__logo:focus-visible svg,
+  .home-header nav .header__logo:focus-visible img {
+    transform: none;
+  }
 }
 
 header nav .menu-toggle,
