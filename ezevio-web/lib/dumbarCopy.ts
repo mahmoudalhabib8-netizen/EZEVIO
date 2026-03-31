@@ -64,33 +64,15 @@ export const ABOUT_SECTIONS: { heading: string; body: string }[] = [
   },
 ];
 
-/** Work index: case study tiles (grid + `/work/[slug]`). */
+/** Work index: titles + routes for `/work` and `/work/[slug]` (visuals are placeholders in UI). */
 export const WORK_TILES: {
   href: string;
   title: string;
-  poster?: string;
-  videoSrc?: string;
 }[] = [
-  {
-    href: "/work/nuerlo",
-    title: "NUERLO – AI Course Marketplace",
-    poster: "/nuerlo-cover.svg",
-  },
-  {
-    href: "/work/tathor",
-    title: "TATHOR – AI Business Intelligence",
-    poster: "/tathor-cover.svg",
-  },
-  {
-    href: "/work/class-ace",
-    title: "CLASS ACE – Assignment & test prep",
-    poster: "/get-aced-cover.svg",
-  },
-  {
-    href: "/work/branory",
-    title: "BRANORY – Food & cuisine restaurant",
-    poster: "/branory-cover.svg",
-  },
+  { href: "/work/nuerlo", title: "NUERLO – AI Course Marketplace" },
+  { href: "/work/tathor", title: "TATHOR – AI Business Intelligence" },
+  { href: "/work/class-ace", title: "CLASS ACE – Assignment & test prep" },
+  { href: "/work/branory", title: "BRANORY – Food & cuisine restaurant" },
 ];
 
 /** Resolve a work tile for `/work/[slug]` metadata and case pages. */

@@ -1191,7 +1191,7 @@ section.projects .project [data-project-title] a:hover {
 
 .t-work .work-project-card {
   box-sizing: border-box;
-  background-color: #efede6;
+  background-color: #ffffff;
   padding: 14px 14px 18px;
   border-radius: 4px;
 }
@@ -1226,12 +1226,26 @@ section.projects .project [data-project-title] a:hover {
   margin: 0;
 }
 
+.t-work .project-link figure .work-card-filler,
 .t-work .project-link figure video,
 .t-work .project-link figure img,
 .t-work .project-link figure picture,
 .t-work .project-link figure .videogif {
   aspect-ratio: 4/5;
   background-size: cover;
+}
+
+.t-work .project-link figure .work-card-filler {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.t-work .work-project-card:hover .work-card-filler {
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .t-work .project-link figure .videogif {
@@ -1243,25 +1257,9 @@ section.projects .project [data-project-title] a:hover {
   background-color: #000000;
 }
 
-.t-work .work-project-card figure .videogif {
-  background-color: #e6e4dc;
-}
-
 .t-work .project-link figcaption {
   transition: transform 0.3s cubic-bezier(1, 0, 1, 1);
   transform-origin: top left;
-}
-
-@media only screen and (min-width: 64em) {
-  .t-work .project-link:not(.work-project-card) figcaption {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 10px;
-    margin: 0;
-    pointer-events: none;
-  }
 }
 
 .t-work .work-project-card figcaption {
