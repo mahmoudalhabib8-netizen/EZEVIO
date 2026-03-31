@@ -75,10 +75,18 @@ html.menu-is-open section.projects {
 }
 
 /* ——— Page transitions (Studio Dumbar: PT-*_out) ——— */
-html.PT-general_out .dumbar-inner-shell > .site-main,
-html.PT-general_out .dumbar-inner-shell > footer.c-footer,
-html.PT-work_out .dumbar-inner-shell > .site-main,
-html.PT-work_out .dumbar-inner-shell > footer.c-footer {
+html.PT-general_out .dumbar-inner-shell,
+html.PT-work_out .dumbar-inner-shell {
+  transform: scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s cubic-bezier(1, 0, 1, 1) 0.2s,
+    opacity 0s linear 0.4s;
+}
+
+/* Homepage wrapper uses a different root element than inner pages. */
+html.PT-general_out .home-scroll-shell,
+html.PT-work_out .home-scroll-shell {
   transform: scale(0.9);
   opacity: 0;
   pointer-events: none;
@@ -87,10 +95,15 @@ html.PT-work_out .dumbar-inner-shell > footer.c-footer {
 }
 
 @media only screen and (max-width: 63.96875em) {
-  html.PT-general_out .dumbar-inner-shell > .site-main,
-  html.PT-general_out .dumbar-inner-shell > footer.c-footer,
-  html.PT-work_out .dumbar-inner-shell > .site-main,
-  html.PT-work_out .dumbar-inner-shell > footer.c-footer {
+  html.PT-general_out .dumbar-inner-shell,
+  html.PT-work_out .dumbar-inner-shell {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.22s ease-out 0.06s;
+  }
+
+  html.PT-general_out .home-scroll-shell,
+  html.PT-work_out .home-scroll-shell {
     transform: none;
     opacity: 0;
     transition: opacity 0.22s ease-out 0.06s;

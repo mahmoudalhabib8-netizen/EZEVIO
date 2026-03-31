@@ -89,7 +89,7 @@ export function PageTransitionsMount() {
 
       window.setTimeout(() => {
         router.push(nextHref);
-      }, 220);
+      }, 260);
     };
 
     document.addEventListener("click", onClick, true);
