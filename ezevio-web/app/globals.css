@@ -74,6 +74,29 @@ html.menu-is-open section.projects {
   opacity: 0;
 }
 
+/* ——— Page transitions (Studio Dumbar: PT-*_out) ——— */
+html.PT-general_out .dumbar-inner-shell > .site-main,
+html.PT-general_out .dumbar-inner-shell > footer.c-footer,
+html.PT-work_out .dumbar-inner-shell > .site-main,
+html.PT-work_out .dumbar-inner-shell > footer.c-footer {
+  transform: scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s cubic-bezier(1, 0, 1, 1) 0.2s,
+    opacity 0s linear 0.4s;
+}
+
+@media only screen and (max-width: 63.96875em) {
+  html.PT-general_out .dumbar-inner-shell > .site-main,
+  html.PT-general_out .dumbar-inner-shell > footer.c-footer,
+  html.PT-work_out .dumbar-inner-shell > .site-main,
+  html.PT-work_out .dumbar-inner-shell > footer.c-footer {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.22s ease-out 0.06s;
+  }
+}
+
 /*
  * Do not set transform here: any transform on an ancestor makes position:fixed
  * descendants stick to that box instead of the viewport (nav would scroll away).
