@@ -228,10 +228,10 @@ export function HomeExperience({ projects }: Props) {
               <nav>
                 <Link href="/" className="header__logo">
                   <Image
-                    src="/ezevio-logo.svg"
+                    src="/ezevio-logo-2.svg"
                     alt="EZEVIO"
-                    width={348}
-                    height={76}
+                    width={226}
+                    height={59}
                     priority
                     unoptimized
                   />

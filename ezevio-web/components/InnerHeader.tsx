@@ -54,10 +54,10 @@ export function InnerHeader() {
         <nav className="o-col-12 inner-nav">
           <Link href="/" className="header__logo">
             <Image
-              src="/ezevio-logo.svg"
+              src="/ezevio-logo-2.svg"
               alt="EZEVIO"
-              width={348}
-              height={76}
+              width={226}
+              height={59}
               priority
               unoptimized
             />
