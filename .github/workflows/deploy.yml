@@ -47,6 +47,12 @@ jobs:
           find out -name '*.html' -exec sed -i 's|"/ezevio-logo|"/EZEVIO/ezevio-logo|g' {} +
           find out -name '*.css' -exec sed -i 's|url(/fonts/|url(/EZEVIO/fonts/|g' {} +
 
+      # GitHub Pages runs Jekyll unless disabled; Jekyll skips paths starting with _
+      # (including _next), so CSS/JS 404 and the site renders unstyled.
+      - name: Disable Jekyll for static export
+        working-directory: ezevio-web
+        run: touch out/.nojekyll
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
