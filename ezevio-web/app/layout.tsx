@@ -2,10 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: {
-    default: "EZEVIO",
-    template: "EZEVIO - %s",
-  },
+  title: "EZEVIO",
   description:
     "EZEVIO — Mahmoud Alhabib. Product, brand, and frontend work with an obsessive eye for quality.",
 };

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { InnerPageShell } from "@/components/InnerPageShell";
 import { getWorkTileBySlug, WORK_TILES } from "@/lib/dumbarCopy";
+import { docTitle } from "@/lib/siteMeta";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tile = getWorkTileBySlug(slug);
   const title = tile?.title ?? formatSlugTitle(slug);
-  return { title };
+  return { title: docTitle(title) };
 }
 
 function formatSlugTitle(slug: string) {

@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { InnerPageShell } from "@/components/InnerPageShell";
 import { SplitSection } from "@/components/SplitSection";
 import { SERVICE_SECTIONS } from "@/lib/dumbarCopy";
+import { docTitle } from "@/lib/siteMeta";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: docTitle("Services"),
 };
 
 export default function ServicesPage() {

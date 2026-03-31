@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InnerPageShell } from "@/components/InnerPageShell";
+import { docTitle } from "@/lib/siteMeta";
 
 export const metadata: Metadata = {
-  title: "Privacy",
+  title: docTitle("Privacy"),
 };
 
 export default function PrivacyPage() {

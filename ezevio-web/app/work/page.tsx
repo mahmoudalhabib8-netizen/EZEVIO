@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { InnerPageShell } from "@/components/InnerPageShell";
 import { WorkGrid } from "@/components/WorkGrid";
 import { WORK_TILES } from "@/lib/dumbarCopy";
+import { docTitle } from "@/lib/siteMeta";
 
 export const metadata: Metadata = {
-  title: "Work",
+  title: docTitle("Work"),
 };
 
 export default function WorkPage() {
