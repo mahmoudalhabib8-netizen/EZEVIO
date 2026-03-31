@@ -33,19 +33,13 @@ jobs:
         working-directory: ezevio-web
         run: npm ci
 
+      # Custom domain (ezevio.com) serves this site at the domain root. Do not set
+      # NEXT_PUBLIC_BASE_PATH=/EZEVIO here — that only matches username.github.io/REPO/
+      # and breaks asset URLs on the apex domain (HTML requested /EZEVIO/_next/... but
+      # files live at /_next/... → 404, unstyled page).
       - name: Build and export
         working-directory: ezevio-web
-        env:
-          NEXT_PUBLIC_BASE_PATH: /EZEVIO
         run: npm run build
-
-      # Next.js static export does not prefix every root-absolute public URL when basePath is set;
-      # GitHub project pages are served under /EZEVIO/, so patch HTML/CSS before upload.
-      - name: Patch asset URLs for GitHub Pages base path
-        working-directory: ezevio-web
-        run: |
-          find out -name '*.html' -exec sed -i 's|"/ezevio-logo|"/EZEVIO/ezevio-logo|g' {} +
-          find out -name '*.css' -exec sed -i 's|url(/fonts/|url(/EZEVIO/fonts/|g' {} +
 
       # GitHub Pages runs Jekyll unless disabled; Jekyll skips paths starting with _
       # (including _next), so CSS/JS 404 and the site renders unstyled.
