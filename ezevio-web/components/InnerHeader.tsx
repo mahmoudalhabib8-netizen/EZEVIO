@@ -9,6 +9,8 @@ import { SITE_NAV_ITEMS } from "@/lib/siteNav";
 function navPathActive(pathname: string, href: string) {
   const p = pathname.replace(/\/$/, "") || "/";
   const h = href.replace(/\/$/, "") || "/";
+  /** `/` is Services landing; `/services` is the same page for bookmarks. */
+  if (h === "/" && (p === "/" || p === "/services")) return true;
   return p === h;
 }
 

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { AboutPageView } from "@/components/AboutPageView";
+import { ServicesPageView } from "@/components/ServicesPageView";
 import { docTitle } from "@/lib/siteMeta";
 
 export const metadata: Metadata = {
-  title: docTitle("About"),
+  title: docTitle("Services"),
 };
 
 export default function Home() {
-  return <AboutPageView />;
+  return <ServicesPageView />;
 }
