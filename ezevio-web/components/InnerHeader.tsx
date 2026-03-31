@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { HeaderLogoMark } from "@/components/HeaderLogoMark";
 import { useEffect, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { usePathname } from "next/navigation";
 import { SITE_NAV_ITEMS } from "@/lib/siteNav";
@@ -53,14 +53,7 @@ export function InnerHeader() {
       <div className="o-container">
         <nav className="o-col-12 inner-nav">
           <Link href="/" className="header__logo">
-            <Image
-              src="/ezevio-logo-2.svg"
-              alt="EZEVIO"
-              width={226}
-              height={59}
-              priority
-              unoptimized
-            />
+            <HeaderLogoMark priority />
           </Link>
           <div
             className="menu-toggle"

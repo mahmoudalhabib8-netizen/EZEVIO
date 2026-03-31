@@ -303,6 +303,7 @@ header nav .header__logo,
   pointer-events: all;
   cursor: pointer;
   z-index: 10;
+  overflow: visible;
 }
 
 @media only screen and (min-width: 64em) {
@@ -312,51 +313,66 @@ header nav .header__logo,
   }
 }
 
-header nav .header__logo svg,
-header nav .header__logo img,
-.home-header nav .header__logo svg,
-.home-header nav .header__logo img {
+/* Logo: full white idle (bar mark); hover crossfades to ezevio-logo-transition.svg */
+header nav .header__logo-mark,
+.home-header nav .header__logo-mark {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+header nav .header__logo-mark .header__logo-default,
+header nav .header__logo-mark .header__logo-transition,
+.home-header nav .header__logo-mark .header__logo-default,
+.home-header nav .header__logo-mark .header__logo-transition {
   height: 13px;
   width: auto;
   display: block;
-  opacity: 0.68;
-  filter: brightness(0.92);
-  transform-origin: left center;
-  transition:
-    opacity 0.45s cubic-bezier(0, 0, 0, 1),
-    filter 0.45s cubic-bezier(0, 0, 0, 1),
-    transform 0.45s cubic-bezier(0, 0, 0, 1);
+  opacity: 1;
+  filter: none;
+  transform: none;
+  transition: opacity 0.45s cubic-bezier(0, 0, 0, 1);
+}
+
+header nav .header__logo-mark .header__logo-transition,
+.home-header nav .header__logo-mark .header__logo-transition {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+header nav .header__logo:hover .header__logo-default,
+header nav .header__logo:focus-visible .header__logo-default,
+.home-header nav .header__logo:hover .header__logo-default,
+.home-header nav .header__logo:focus-visible .header__logo-default {
+  opacity: 0;
+}
+
+header nav .header__logo:hover .header__logo-transition,
+header nav .header__logo:focus-visible .header__logo-transition,
+.home-header nav .header__logo:hover .header__logo-transition,
+.home-header nav .header__logo:focus-visible .header__logo-transition {
+  opacity: 1;
 }
 
 @media only screen and (min-width: 30em) {
-  header nav .header__logo svg,
-  header nav .header__logo img,
-  .home-header nav .header__logo svg,
-  .home-header nav .header__logo img {
+  header nav .header__logo-mark .header__logo-default,
+  header nav .header__logo-mark .header__logo-transition,
+  .home-header nav .header__logo-mark .header__logo-default,
+  .home-header nav .header__logo-mark .header__logo-transition {
     height: 28px;
   }
 }
 
 @media only screen and (min-width: 64em) {
-  header nav .header__logo svg,
-  header nav .header__logo img,
-  .home-header nav .header__logo svg,
-  .home-header nav .header__logo img {
+  header nav .header__logo-mark .header__logo-default,
+  header nav .header__logo-mark .header__logo-transition,
+  .home-header nav .header__logo-mark .header__logo-default,
+  .home-header nav .header__logo-mark .header__logo-transition {
     height: 32px;
   }
-}
-
-header nav .header__logo:hover svg,
-header nav .header__logo:hover img,
-.home-header nav .header__logo:hover svg,
-.home-header nav .header__logo:hover img,
-header nav .header__logo:focus-visible svg,
-header nav .header__logo:focus-visible img,
-.home-header nav .header__logo:focus-visible svg,
-.home-header nav .header__logo:focus-visible img {
-  opacity: 1;
-  filter: brightness(1);
-  transform: scale(1.02);
 }
 
 header nav .header__logo:hover,
@@ -365,22 +381,11 @@ header nav .header__logo:hover,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  header nav .header__logo svg,
-  header nav .header__logo img,
-  .home-header nav .header__logo svg,
-  .home-header nav .header__logo img {
-    transition-duration: 0.01ms;
-  }
-
-  header nav .header__logo:hover svg,
-  header nav .header__logo:hover img,
-  .home-header nav .header__logo:hover svg,
-  .home-header nav .header__logo:hover img,
-  header nav .header__logo:focus-visible svg,
-  header nav .header__logo:focus-visible img,
-  .home-header nav .header__logo:focus-visible svg,
-  .home-header nav .header__logo:focus-visible img {
-    transform: none;
+  header nav .header__logo-mark .header__logo-default,
+  header nav .header__logo-mark .header__logo-transition,
+  .home-header nav .header__logo-mark .header__logo-default,
+  .home-header nav .header__logo-mark .header__logo-transition {
+    transition-duration: 0.08s;
   }
 }
 

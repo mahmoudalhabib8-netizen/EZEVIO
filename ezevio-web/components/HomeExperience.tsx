@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { HeaderLogoMark } from "@/components/HeaderLogoMark";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -227,14 +228,7 @@ export function HomeExperience({ projects }: Props) {
             <div className="o-container">
               <nav>
                 <Link href="/" className="header__logo">
-                  <Image
-                    src="/ezevio-logo-2.svg"
-                    alt="EZEVIO"
-                    width={226}
-                    height={59}
-                    priority
-                    unoptimized
-                  />
+                  <HeaderLogoMark priority />
                 </Link>
                 <div
                   className="menu-toggle"
