@@ -1,0 +1,1429 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+@import "./dumbar-grid.css";
+
+/*
+ * Palette aligned with studiodumbar.com/main.css (theme-dark):
+ * #000000 background, #767676 html, #868686 body / muted UI,
+ * #ffffff primary type & hover states, #151515 dark-grey sections (if used).
+ */
+
+/* Haas Grot Text — replace file with a properly licensed font if needed */
+@font-face {
+  font-family: "Haas";
+  font-display: block;
+  font-weight: 400;
+  src: url("/fonts/HaasGrotTextR-55Roman.woff") format("woff");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+html,
+body {
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
+  min-height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  /* studiodumbar.com: shared base; html gets #767676 below. */
+  color: #868686;
+}
+
+html {
+  font-family: "Haas", Arial, sans-serif;
+  font-weight: 400;
+  color: #767676;
+  background-color: #000000;
+  min-height: 100%;
+  height: 100%;
+  font-size: 7.5px;
+}
+
+@media only screen and (min-width: 64em) {
+  html {
+    font-size: 10px;
+  }
+}
+
+html.homepage body *::selection {
+  color: inherit;
+  background-color: transparent;
+}
+
+html.no--scroll {
+  overflow-y: hidden !important;
+}
+
+html.menu-is-open {
+  overflow-y: hidden !important;
+}
+
+html.menu-is-open section.projects {
+  opacity: 0;
+}
+
+.home-scroll-shell,
+.dumbar-inner-shell {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.2s cubic-bezier(0, 0, 0, 1), opacity 0s linear;
+}
+
+/* Homepage: whole scroll shell scales/fades when menu opens. */
+html.menu-is-open .home-scroll-shell {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  transform: scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s cubic-bezier(1, 0, 1, 1) 0.2s,
+    opacity 0s linear 0.4s;
+}
+
+/*
+ * Inner pages (.dumbar-inner-shell): do NOT fade the whole wrapper — that hides the
+ * header and the fixed .mobile-menu (all black). Only dim main + footer.
+ */
+html.menu-is-open .dumbar-inner-shell {
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+html.menu-is-open .dumbar-inner-shell > .site-main,
+html.menu-is-open .dumbar-inner-shell > footer.c-footer {
+  transform: scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s cubic-bezier(1, 0, 1, 1) 0.2s,
+    opacity 0s linear 0.4s;
+}
+
+@media only screen and (max-width: 63.96875em) {
+  html.menu-is-open .home-scroll-shell {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.22s ease-out 0.06s;
+  }
+
+  html.menu-is-open .dumbar-inner-shell > .site-main,
+  html.menu-is-open .dumbar-inner-shell > footer.c-footer {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.22s ease-out 0.06s;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  html.menu-is-open .home-scroll-shell {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  html.menu-is-open .dumbar-inner-shell > .site-main,
+  html.menu-is-open .dumbar-inner-shell > footer.c-footer {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-size: 15px;
+  line-height: 1.2;
+  hyphens: none;
+  word-break: normal;
+  color: #868686;
+  overflow-y: auto;
+}
+
+@media screen and (min-width: 480px) {
+  body {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+  transition: 200ms linear;
+  transition-property: border, background-color, color, opacity;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.o-container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+  max-width: 2800px;
+}
+
+/* Inner pages: full-width nav row (studiodumbar o-col-12) */
+.inner-nav.o-col-12 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+@media only screen and (min-width: 64em) {
+  header:not(.home-header) nav.inner-nav {
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  header:not(.home-header) nav.inner-nav ul {
+    list-style: none;
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    padding-left: 10px;
+  }
+}
+
+/* Work index: header offset + bottom spacing (no .t-default on /work). */
+.t-work__padding {
+  padding-top: 120px;
+  margin-bottom: 120px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-work__padding {
+    padding-top: 160px;
+    margin-bottom: 240px;
+  }
+}
+
+/* ——— Header (Studio Dumbar) ——— */
+header,
+.home-header {
+  padding: 20px 0;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  font-size: 15px;
+  color: #ffffff;
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+@media only screen and (max-width: 63.96875em) {
+  header,
+  .home-header {
+    z-index: 20;
+  }
+}
+
+/* Inner routes: solid nav colors; current link reads as true white (no blend inversion). */
+html.theme-dark header:not(.home-header),
+html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .hamburger-inner,
+html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::before,
+html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::after,
+html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .close-inner::before,
+html.theme-dark header:not(.home-header) nav .menu-toggle .hamburger .hamburger-box .close-inner::after {
+  mix-blend-mode: normal;
+}
+
+@media screen and (min-width: 480px) {
+  header,
+  .home-header {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  header,
+  .home-header {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  header,
+  .home-header {
+    position: fixed;
+    padding: 15px 0;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  header nav,
+  .home-header nav {
+    justify-content: space-between;
+    display: flex;
+  }
+}
+
+header nav .header__logo,
+.home-header nav .header__logo {
+  position: fixed;
+  padding-top: 5px;
+  color: #868686;
+  height: auto;
+  display: inline-block;
+  pointer-events: all;
+  cursor: pointer;
+  z-index: 10;
+}
+
+@media only screen and (min-width: 64em) {
+  header nav .header__logo,
+  .home-header nav .header__logo {
+    position: relative;
+  }
+}
+
+header nav .header__logo svg,
+header nav .header__logo img,
+.home-header nav .header__logo svg,
+.home-header nav .header__logo img {
+  height: 13px;
+  width: auto;
+  display: block;
+}
+
+@media only screen and (min-width: 30em) {
+  header nav .header__logo svg,
+  header nav .header__logo img,
+  .home-header nav .header__logo svg,
+  .home-header nav .header__logo img {
+    height: 28px;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  header nav .header__logo svg,
+  header nav .header__logo img,
+  .home-header nav .header__logo svg,
+  .home-header nav .header__logo img {
+    height: 32px;
+  }
+}
+
+header nav .header__logo:hover,
+.home-header nav .header__logo:hover {
+  color: #ffffff;
+}
+
+header nav .menu-toggle,
+.home-header nav .menu-toggle {
+  position: fixed;
+  z-index: 6;
+  top: 0;
+  right: 0;
+  padding: 23px 18px 23px 23px;
+  pointer-events: all;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media only screen and (min-width: 64em) {
+  header nav .menu-toggle,
+  .home-header nav .menu-toggle {
+    display: none;
+  }
+}
+
+header nav .menu-toggle .hamburger,
+.home-header nav .menu-toggle .hamburger {
+  display: flex;
+  cursor: pointer;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+header nav .menu-toggle .hamburger .hamburger-box,
+.home-header nav .menu-toggle .hamburger .hamburger-box {
+  width: 35px;
+  height: 15px;
+  display: inline-block;
+  position: relative;
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner,
+.home-header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -0.5px;
+  transition: opacity 0s linear 0.4s, transform 0.4s cubic-bezier(1, 0, 1, 1);
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner,
+header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::before,
+header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::after,
+.home-header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner,
+.home-header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::before,
+.home-header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::after {
+  width: 35px;
+  height: 1px;
+  background-color: #868686;
+  position: absolute;
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::before,
+header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::after,
+.home-header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::before,
+.home-header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::after {
+  content: "";
+  display: block;
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::before,
+.home-header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::before {
+  top: -7px;
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::after,
+.home-header nav .menu-toggle .hamburger .hamburger-box .hamburger-inner::after {
+  bottom: -7px;
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .close-inner,
+.home-header nav .menu-toggle .hamburger .hamburger-box .close-inner {
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5px;
+  margin-left: -4.375px;
+  width: 43.75px;
+  height: 1px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0s linear 0.3s, transform 0.4s cubic-bezier(1, 0, 1, 1);
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .close-inner::before,
+header nav .menu-toggle .hamburger .hamburger-box .close-inner::after,
+.home-header nav .menu-toggle .hamburger .hamburger-box .close-inner::before,
+.home-header nav .menu-toggle .hamburger .hamburger-box .close-inner::after {
+  width: 43.75px;
+  height: 1px;
+  background-color: #868686;
+  position: absolute;
+  content: "";
+  display: block;
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .close-inner::before,
+.home-header nav .menu-toggle .hamburger .hamburger-box .close-inner::before {
+  transform: rotate(23deg);
+}
+
+header nav .menu-toggle .hamburger .hamburger-box .close-inner::after,
+.home-header nav .menu-toggle .hamburger .hamburger-box .close-inner::after {
+  transform: rotate(-23deg);
+}
+
+header nav .menu-toggle .hamburger.active .hamburger-inner,
+.home-header nav .menu-toggle .hamburger.active .hamburger-inner {
+  transition: opacity 0s linear 0.3s, transform 0.4s cubic-bezier(1, 0, 1, 1);
+  transform: scale(1.5);
+  opacity: 0;
+}
+
+header nav .menu-toggle .hamburger.active .close-inner,
+.home-header nav .menu-toggle .hamburger.active .close-inner {
+  transition: opacity 0s linear 0.4s, transform 0.4s cubic-bezier(1, 0, 1, 1);
+  transform: scale(1);
+  opacity: 1;
+}
+
+header nav:not(.mobile-menu) ul,
+.home-header nav:not(.mobile-menu) ul {
+  display: none;
+}
+
+@media only screen and (min-width: 64em) {
+  header nav:not(.mobile-menu) ul,
+  .home-header nav:not(.mobile-menu) ul {
+    list-style: none;
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    padding-left: 10px;
+  }
+}
+
+header nav:not(.mobile-menu) ul a,
+.home-header nav:not(.mobile-menu) ul a {
+  color: #868686;
+  cursor: pointer;
+  line-height: 1;
+  pointer-events: all;
+}
+
+header nav:not(.mobile-menu) ul a:hover,
+.home-header nav:not(.mobile-menu) ul a.active,
+.home-header nav:not(.mobile-menu) ul a:hover,
+.home-header nav:not(.mobile-menu) ul a.active {
+  color: #ffffff;
+}
+
+header nav:not(.mobile-menu) ul a[aria-current="page"],
+.home-header nav:not(.mobile-menu) ul a[aria-current="page"] {
+  color: #ffffff;
+}
+
+.homepage header nav:not(.mobile-menu) ul a,
+.homepage .home-header nav:not(.mobile-menu) ul a {
+  color: #ffffff;
+}
+
+.homepage header nav:not(.mobile-menu) ul a:hover,
+.homepage .home-header nav:not(.mobile-menu) ul a:hover {
+  color: #868686;
+}
+
+header .mobile-menu,
+.home-header .mobile-menu {
+  position: fixed;
+  display: flex;
+  align-items: flex-end;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  padding: 18px;
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 63.96875em) {
+  header .mobile-menu,
+  .home-header .mobile-menu {
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.2s ease-out;
+  }
+
+  header .mobile-menu.active,
+  .home-header .mobile-menu.active {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  header .mobile-menu,
+  .home-header .mobile-menu {
+    display: none;
+  }
+}
+
+header .mobile-menu.active,
+.home-header .mobile-menu.active {
+  pointer-events: all;
+}
+
+header .mobile-menu ul,
+.home-header .mobile-menu ul {
+  font-size: 60px;
+  letter-spacing: -0.02em;
+  list-style: none;
+  line-height: 0.8;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
+}
+
+@media screen and (min-width: 480px) {
+  header .mobile-menu ul,
+  .home-header .mobile-menu ul {
+    font-size: calc(60px + 40 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  header .mobile-menu ul,
+  .home-header .mobile-menu ul {
+    font-size: 100px;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  header .mobile-menu ul,
+  .home-header .mobile-menu ul {
+    letter-spacing: -0.04em;
+  }
+}
+
+header .mobile-menu ul li a,
+.home-header .mobile-menu ul li a {
+  display: block;
+  color: #868686;
+  opacity: 0;
+  transform: scale(0.92);
+  transform-origin: top left;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  /* Symmetric ease; avoid 0.4s opacity delay (caused links to pop late / feel out of sync). */
+  transition:
+    opacity 0.28s cubic-bezier(0, 0, 0, 1),
+    transform 0.32s cubic-bezier(0, 0, 0, 1),
+    color 0.15s linear;
+}
+
+header .mobile-menu ul li a:hover,
+.home-header .mobile-menu ul li a:hover {
+  color: #ffffff;
+}
+
+header .mobile-menu ul li a.active,
+.home-header .mobile-menu ul li a.active {
+  color: #ffffff;
+}
+
+header .mobile-menu ul:hover li a,
+.home-header .mobile-menu ul:hover li a {
+  color: #868686;
+}
+
+header .mobile-menu ul:hover li a.active,
+.home-header .mobile-menu ul:hover li a.active {
+  color: #868686;
+}
+
+header .mobile-menu ul:hover li a:hover,
+.home-header .mobile-menu ul:hover li a:hover {
+  color: #ffffff;
+}
+
+header .mobile-menu.active ul li a,
+.home-header .mobile-menu.active ul li a {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger: opacity + transform animate together after a short delay (no “invisible scale” frame). */
+header .mobile-menu.active ul li:nth-child(1) a,
+.home-header .mobile-menu.active ul li:nth-child(1) a {
+  transition-delay: 0.08s, 0.08s;
+}
+
+header .mobile-menu.active ul li:nth-child(2) a,
+.home-header .mobile-menu.active ul li:nth-child(2) a {
+  transition-delay: 0.12s, 0.12s;
+}
+
+header .mobile-menu.active ul li:nth-child(3) a,
+.home-header .mobile-menu.active ul li:nth-child(3) a {
+  transition-delay: 0.16s, 0.16s;
+}
+
+header .mobile-menu.active ul li:nth-child(4) a,
+.home-header .mobile-menu.active ul li:nth-child(4) a {
+  transition-delay: 0.2s, 0.2s;
+}
+
+header .mobile-menu.active ul li:nth-child(5) a,
+.home-header .mobile-menu.active ul li:nth-child(5) a {
+  transition-delay: 0.24s, 0.24s;
+}
+
+.home .home-header .mobile-menu ul li a,
+.homepage .home-header .mobile-menu ul li a {
+  color: #ffffff;
+}
+
+.home-header {
+  color: #ffffff;
+}
+
+.home-header nav a {
+  color: #ffffff;
+}
+
+@media only screen and (min-width: 64em) {
+  .home-header nav a:hover {
+    color: #ffffff;
+  }
+}
+
+/* ——— Home panels ——— */
+.t-home .panels {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-home .panels {
+    flex-direction: row;
+  }
+}
+
+/* ——— Projects hero (matches studiodumbar section.projects) ——— */
+section.projects {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  cursor: default;
+  pointer-events: auto;
+}
+
+section.projects.imageTransitioning {
+  transform: scale(0.85);
+}
+
+section.projects .project {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: default;
+  opacity: 0;
+  pointer-events: none;
+}
+
+section.projects .project figure {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+section.projects .project figure video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  overflow: visible;
+}
+
+section.projects .project figure figcaption {
+  display: none;
+}
+
+section.projects .project.imageActive {
+  opacity: 1;
+}
+
+section.projects .project.imageActive.imageTransitioning {
+  transform: scale(0.8);
+}
+
+section.projects .project.projectActive {
+  pointer-events: all;
+}
+
+section.projects .project [data-project-title] {
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+  mix-blend-mode: difference;
+  text-align: right;
+}
+
+section.projects .project [data-project-title] > span {
+  right: 0;
+  bottom: 0;
+  white-space: pre;
+  text-align: right;
+}
+
+section.projects .project [data-project-title] a:hover {
+  color: #868686;
+}
+
+.main.t-home {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ——— Inner page shell (studiodumbar .wrapper) ——— */
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Header + main + footer: one column so footer sits consistently; main grows on short pages. */
+.site-chrome {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1 0 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+/* studiodumbar .t-default — clears fixed header; do not add extra page-inner padding on top. */
+.t-default {
+  padding-top: 120px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-default {
+    padding-top: 160px;
+  }
+}
+
+.t-default strong {
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-default strong {
+    margin-bottom: 10px;
+  }
+}
+
+.o-grid.content {
+  width: 100%;
+}
+
+.content a {
+  color: #868686;
+}
+
+.content a:hover {
+  color: #ffffff;
+}
+
+/* studiodumbar .t-about / .t-services / .t-jobs typography */
+.t-about,
+.t-services,
+.t-jobs,
+.t-contact {
+  margin-bottom: 120px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-about,
+  .t-services,
+  .t-jobs,
+  .t-contact {
+    margin-bottom: 240px;
+  }
+}
+
+.t-about p,
+.t-services p,
+.t-jobs p {
+  font-size: 15px;
+  line-height: 1.25;
+  color: #868686;
+}
+
+@media screen and (min-width: 480px) {
+  .t-about p,
+  .t-services p,
+  .t-jobs p {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-about p,
+  .t-services p,
+  .t-jobs p {
+    font-size: 20px;
+  }
+}
+
+.t-services p,
+.t-about p {
+  color: #ffffff;
+}
+
+.t-about p + p,
+.t-services p + p,
+.t-jobs p + p {
+  margin-top: 15px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-about p + p,
+  .t-services p + p,
+  .t-jobs p + p {
+    margin-top: 30px;
+  }
+}
+
+.t-about a + p,
+.t-services a + p,
+.t-jobs a + p {
+  margin-top: 40px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-about a + p,
+  .t-services a + p,
+  .t-jobs a + p {
+    margin-top: 35px;
+  }
+}
+
+.t-about h3,
+.t-services h3,
+.t-jobs h3 {
+  font-size: 15px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+@media screen and (min-width: 480px) {
+  .t-about h3,
+  .t-services h3,
+  .t-jobs h3 {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-about h3,
+  .t-services h3,
+  .t-jobs h3 {
+    font-size: 20px;
+  }
+}
+
+.t-about .mega-title,
+.t-services .mega-title {
+  line-height: 0.9;
+  margin-bottom: 80px;
+  letter-spacing: -0.02em;
+  font-size: 60px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 480px) {
+  .t-about .mega-title,
+  .t-services .mega-title {
+    font-size: calc(60px + 140 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-about .mega-title,
+  .t-services .mega-title {
+    font-size: 200px;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  .t-about .mega-title,
+  .t-services .mega-title {
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    margin-left: -10px;
+    margin-bottom: 160px;
+  }
+}
+
+.t-about .mega-title span,
+.t-services .mega-title span {
+  display: inline-flex;
+}
+
+.t-about section,
+.t-services section,
+.t-jobs section {
+  margin-top: 160px;
+}
+
+.t-about section:first-of-type,
+.t-services section:first-of-type,
+.t-jobs section:first-of-type {
+  margin-top: 0;
+}
+
+.t-about section + section,
+.t-services section + section,
+.t-jobs section + section {
+  margin-top: 60px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-about section + section,
+  .t-services section + section,
+  .t-jobs section + section {
+    margin-top: 120px;
+  }
+}
+
+.t-about a,
+.t-services a,
+.t-jobs a {
+  font-size: 15px;
+  color: #868686;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 480px) {
+  .t-about a,
+  .t-services a,
+  .t-jobs a {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-about a,
+  .t-services a,
+  .t-jobs a {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  .t-about a,
+  .t-services a,
+  .t-jobs a {
+    margin-top: 30px;
+  }
+}
+
+.t-about a:hover,
+.t-services a:hover,
+.t-jobs a:hover {
+  color: #ffffff;
+}
+
+.t-about a.about-link,
+.t-services a.about-link,
+.t-jobs a.about-link {
+  display: block;
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 480px) {
+  .t-about a.about-link,
+  .t-services a.about-link,
+  .t-jobs a.about-link {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-about a.about-link,
+  .t-services a.about-link,
+  .t-jobs a.about-link {
+    font-size: 20px;
+  }
+}
+
+.t-about ul,
+.t-services ul,
+.t-jobs ul {
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-about ul,
+  .t-services ul,
+  .t-jobs ul {
+    margin-top: 30px;
+  }
+}
+
+.t-jobs ul.two-column-list li {
+  list-style: none;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+@media screen and (min-width: 480px) {
+  .t-jobs ul.two-column-list li {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-jobs ul.two-column-list li {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  .t-jobs ul.two-column-list li {
+    flex-direction: row;
+  }
+}
+
+.t-jobs ul.two-column-list li span {
+  min-width: 120px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-jobs ul.two-column-list li span {
+    min-width: 160px;
+  }
+}
+
+.t-jobs ul.two-column-list li a {
+  margin-top: 0;
+}
+
+/* Work index: studiodumbar uses .o-grid flex + .o-col-* */
+.t-work .o-grid {
+  width: 100%;
+}
+
+.t-work .project-link {
+  margin-bottom: 40px;
+  color: #868686;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-work .project-link {
+    margin-bottom: 120px;
+  }
+}
+
+.t-work .project-link .figure-video,
+.t-work .project-link .figure-image {
+  transition: transform 0.3s cubic-bezier(1, 0, 1, 1);
+  margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-work .project-link .figure-video,
+  .t-work .project-link .figure-image {
+    margin-bottom: 20px;
+  }
+}
+
+.t-work .project-link figure {
+  position: relative;
+  margin: 0;
+}
+
+.t-work .project-link figure video,
+.t-work .project-link figure img,
+.t-work .project-link figure picture,
+.t-work .project-link figure .videogif {
+  aspect-ratio: 4/5;
+  background-size: cover;
+}
+
+.t-work .project-link figure .videogif {
+  width: 100%;
+  max-width: 100%;
+  vertical-align: top;
+  display: block;
+  object-fit: cover;
+  background-color: #000000;
+}
+
+.t-work .project-link figcaption {
+  transition: transform 0.3s cubic-bezier(1, 0, 1, 1);
+  transform-origin: top left;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-work .project-link figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    margin: 0;
+    pointer-events: none;
+  }
+}
+
+.t-work .project-link .figcaption-caption {
+  display: block;
+  font-size: 18.75px;
+  line-height: 1.2;
+  transition: color 0.3s cubic-bezier(1, 0, 1, 1);
+}
+
+@media screen and (min-width: 480px) {
+  .t-work .project-link .figcaption-caption {
+    font-size: calc(18.75px + 11.25 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-work .project-link .figcaption-caption {
+    font-size: 30px;
+  }
+}
+
+.t-work .project-link:hover .figcaption-caption {
+  color: #ffffff;
+}
+
+/* studiodumbar .t-contact */
+.t-contact {
+  padding-bottom: 40px;
+}
+
+.t-contact p {
+  font-size: 15px;
+  line-height: 1.25;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 480px) {
+  .t-contact p {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-contact p {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  .t-contact p {
+    margin-bottom: 40px;
+  }
+}
+
+.t-contact p.small {
+  font-size: 15px;
+}
+
+@media screen and (min-width: 480px) {
+  .t-contact p.small {
+    font-size: calc(15px + 5 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .t-contact p.small {
+    font-size: 20px;
+  }
+}
+
+body .t-contact {
+  height: 100%;
+}
+
+.t-contact a {
+  color: #868686;
+  margin-top: 0;
+}
+
+.t-contact a:hover {
+  color: #ffffff;
+}
+
+/* ——— Scroll reveals (studiodumbar AOS + .aos-animate) ——— */
+[data-aos="topleft-hardscale"] {
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: top left;
+  transition:
+    opacity 0s linear 0.3s,
+    transform 0.3s cubic-bezier(0, 0, 0, 1) 0.2s;
+}
+
+[data-aos="topleft-hardscale"].aos-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-aos="topleft-hardscale-steps"] {
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: center left;
+  transition:
+    opacity 0s linear 0.3s,
+    transform 0.3s cubic-bezier(0, 0, 0, 1) 0.2s;
+}
+
+[data-aos="topleft-hardscale-steps"].aos-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-aos="topleft-hardscale-steps"]:nth-of-type(2) {
+  transition:
+    opacity 0s linear 0.5s,
+    transform 0.3s cubic-bezier(0, 0, 0, 1) 0.4s;
+}
+
+[data-aos="topleft-hardscale-steps"]:nth-of-type(3) {
+  transition:
+    opacity 0s linear 0.7s,
+    transform 0.3s cubic-bezier(0, 0, 0, 1) 0.6s;
+}
+
+[data-aos="topleft-hardscale-service-step-1"],
+[data-aos="topleft-hardscale-service-step-2"] {
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: top left;
+  transition:
+    opacity 0s linear 0.3s,
+    transform 0.3s cubic-bezier(0, 0, 0, 1) 0.2s;
+}
+
+[data-aos="topleft-hardscale-service-step-1"].aos-animate,
+[data-aos="topleft-hardscale-service-step-2"].aos-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-aos="center-hardscale-work_page"] {
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: center;
+  transition-timing-function: cubic-bezier(0, 0, 0, 1);
+  transition:
+    opacity 0s linear 0.25s,
+    transform 0.2s cubic-bezier(0, 0, 0, 1) 0.2s;
+}
+
+[data-aos="center-hardscale-work_page"].aos-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media only screen and (min-width: 48em) {
+  .t-work .o-grid > [data-aos="center-hardscale-work_page"]:nth-child(even) {
+    transition:
+      opacity 0s linear 0.45s,
+      transform 0.2s cubic-bezier(0, 0, 0, 1) 0.4s;
+  }
+}
+
+@media only screen and (min-width: 77.5em) {
+  .t-work .o-grid > [data-aos="center-hardscale-work_page"]:nth-child(3n-2) {
+    transition:
+      opacity 0s linear 0.25s,
+      transform 0.2s cubic-bezier(0, 0, 0, 1) 0.2s;
+  }
+
+  .t-work .o-grid > [data-aos="center-hardscale-work_page"]:nth-child(3n-1) {
+    transition:
+      opacity 0s linear 0.45s,
+      transform 0.2s cubic-bezier(0, 0, 0, 1) 0.4s;
+  }
+
+  .t-work .o-grid > [data-aos="center-hardscale-work_page"]:nth-child(3n) {
+    transition:
+      opacity 0s linear 0.65s,
+      transform 0.2s cubic-bezier(0, 0, 0, 1) 0.6s;
+  }
+}
+
+/* ——— Footer ——— */
+.c-footer {
+  position: relative;
+  z-index: 1;
+  background-color: #000000;
+}
+
+.c-footer a {
+  color: #868686;
+  transition: color 0s;
+}
+
+.c-footer a:hover {
+  color: #ffffff;
+}
+
+.c-footer .welcome-everyone p {
+  color: #ffffff;
+  line-height: 1.2;
+  font-size: 25px;
+  margin-bottom: 60px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+@media screen and (min-width: 480px) {
+  .c-footer .welcome-everyone p {
+    font-size: calc(25px + 15 * (100vw - 480px) / 760);
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .c-footer .welcome-everyone p {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (min-width: 64em) {
+  .c-footer .welcome-everyone p {
+    margin-bottom: 80px;
+  }
+}
+
+.c-footer .welcome-everyone p a {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media only screen and (min-width: 64em) {
+  .c-footer .welcome-everyone p a {
+    white-space: nowrap;
+  }
+}

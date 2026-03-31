@@ -1,0 +1,184 @@
+/* Studio Dumbar object grid — flex row + 12-col widths (studiodumbar.com/main.css, subset). */
+
+.o-grid {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.o-grid.content {
+  width: 100%;
+}
+
+.o-col-12 {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  padding-right: 5px;
+  padding-left: 5px;
+  flex-basis: 100%;
+  max-width: 100%;
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .o-col-12 {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .o-col-6--md {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 5px;
+    padding-left: 5px;
+    flex-basis: 50%;
+    max-width: 50%;
+    display: flex;
+  }
+
+  .o-col-10--md {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 5px;
+    padding-left: 5px;
+    flex-basis: 83.33333%;
+    max-width: 83.33333%;
+    display: flex;
+  }
+
+  .o-col-12--md {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 5px;
+    padding-left: 5px;
+    flex-basis: 100%;
+    max-width: 100%;
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .o-col-6--md,
+  .o-col-10--md,
+  .o-col-12--md {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+
+@media (min-width: 1240px) {
+  .o-col-3--xlg {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    flex-basis: 25%;
+    max-width: 25%;
+    display: flex;
+  }
+
+  .o-col-4--xlg {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    flex-basis: 33.33333%;
+    max-width: 33.33333%;
+    display: flex;
+  }
+
+  .o-col-5--xlg {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    flex-basis: 41.66667%;
+    max-width: 41.66667%;
+    display: flex;
+  }
+
+  .o-col-6--xlg {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    flex-basis: 50%;
+    max-width: 50%;
+    display: flex;
+  }
+
+  .o-col-8--xlg {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    flex-basis: 66.66667%;
+    max-width: 66.66667%;
+    display: flex;
+  }
+
+  .o-col-12--xlg {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-right: 10px;
+    padding-left: 10px;
+    flex-basis: 100%;
+    max-width: 100%;
+    display: flex;
+  }
+
+  .u-push-3--xlg {
+    position: relative;
+    right: -25%;
+  }
+
+  .u-push-6--xlg {
+    position: relative;
+    right: -50%;
+  }
+}
+
+.mega-title-wrap {
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.t-work .project-link {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Stack text inside a flex column cell (headings + paragraphs). */
+.dumbar-col-stack {
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  width: 100%;
+}
