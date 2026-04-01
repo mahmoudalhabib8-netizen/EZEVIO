@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "EZEVIO",
   description:
-    "EZEVIO — Mahmoud Alhabib. Product, brand, and frontend work with an obsessive eye for quality.",
+    "EZEVIO. Mahmoud Alhabib. Product, brand, and frontend work with an obsessive eye for quality.",
 };
 
 export const viewport: Viewport = {

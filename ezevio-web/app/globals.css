@@ -1255,6 +1255,15 @@ section.projects .project [data-project-title] a:hover {
   display: inline;
   font-size: inherit;
   line-height: inherit;
+  color: #868686;
+  text-decoration: none;
+}
+
+.t-about p a:hover,
+.t-services p a:hover,
+.t-jobs p a:hover {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .t-about a.about-link,

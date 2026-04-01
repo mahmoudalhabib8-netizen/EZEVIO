@@ -30,7 +30,7 @@ export default function PrivacyPage() {
               </p>
               <p>
                 Your personal data is processed to handle inquiries, prepare
-                proposals, and carry out conversations about projects—in line
+                proposals, and carry out conversations about projects, in line
                 with our legitimate interests in operating the studio and
                 working with clients. That includes evaluating fit, following up
                 on your message, and keeping records needed for ongoing

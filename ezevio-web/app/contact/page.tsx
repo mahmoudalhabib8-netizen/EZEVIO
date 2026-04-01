@@ -30,7 +30,7 @@ export default function ContactPage() {
                 <a href="mailto:press@ezevio.com">press@ezevio.com</a>
               </p>
               <p>
-                Freelance / contract availability varies—say what you need and
+                Freelance / contract availability varies. Say what you need and your
                 timeline in the first note.
               </p>
               <p>
