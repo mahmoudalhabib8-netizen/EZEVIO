@@ -68,11 +68,29 @@ export const ABOUT_SECTIONS: { heading: string; body: string }[] = [
 export const WORK_TILES: {
   href: string;
   title: string;
+  /** Art for `/work` index tile (same frame as former gray placeholder). */
+  cardImage: string;
 }[] = [
-  { href: "/work/nuerlo", title: "NUERLO – AI Course Marketplace" },
-  { href: "/work/tathor", title: "TATHOR – AI Business Intelligence" },
-  { href: "/work/class-ace", title: "GETACED – Assignment & test prep" },
-  { href: "/work/branory", title: "BRANORY – Food & cuisine restaurant" },
+  {
+    href: "/work/nuerlo",
+    title: "NUERLO – AI Course Marketplace",
+    cardImage: "/blurry-gradient-nuerlo%20(1).svg",
+  },
+  {
+    href: "/work/tathor",
+    title: "TATHOR – AI Business Intelligence",
+    cardImage: "/project-card-tathor.svg",
+  },
+  {
+    href: "/work/class-ace",
+    title: "GETACED – Assignment & test prep",
+    cardImage: "/project-card-getaced.svg",
+  },
+  {
+    href: "/work/branory",
+    title: "BRANORY – Food & cuisine restaurant",
+    cardImage: "/project-card-branory.svg.svg",
+  },
 ];
 
 /** Resolve a work tile for `/work/[slug]` metadata and case pages. */

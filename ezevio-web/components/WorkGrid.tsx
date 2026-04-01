@@ -5,6 +5,7 @@ import Link from "next/link";
 type Tile = {
   href: string;
   title: string;
+  cardImage: string;
 };
 
 /** Work index: white tile + title on page background. */
@@ -20,7 +21,13 @@ export function WorkGrid({ tiles }: { tiles: readonly Tile[] }) {
         >
           <Link href={item.href}>
             <figure className="figure-video">
-              <div className="work-card-filler" aria-hidden />
+              {/* eslint-disable-next-line @next/next/no-img-element -- static SVG tiles from /public */}
+              <img
+                src={item.cardImage}
+                alt=""
+                className="work-card-filler work-card-thumb"
+                draggable={false}
+              />
               <figcaption>
                 <span className="figcaption-caption">{item.title}</span>
               </figcaption>

@@ -1391,10 +1391,18 @@ section.projects .project [data-project-title] a:hover {
   box-sizing: border-box;
 }
 
+.t-work .project-link figure .work-card-thumb {
+  height: auto;
+  background-color: transparent;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+
 .t-work .project-link figure .videogif {
   width: 100%;
   max-width: 100%;
-  vertical-align: top;
   display: block;
   object-fit: cover;
   background-color: #000000;
