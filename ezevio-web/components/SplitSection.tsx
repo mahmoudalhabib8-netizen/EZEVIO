@@ -1,10 +1,11 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import type { ServiceSection } from "@/lib/dumbarCopy";
 
 type Props = {
   section:
     | ServiceSection
-    | { heading: string; body: string; cta?: ServiceSection["cta"] };
+    | { heading: string; body: ReactNode; cta?: ServiceSection["cta"] };
   /** First row uses step-1, following rows step-2 (services + about body sections). */
   serviceRevealStep?: 1 | 2;
 };

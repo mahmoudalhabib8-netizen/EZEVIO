@@ -22,9 +22,10 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
     body: (
       <>
         EZEVIO builds SaaS end to end: landing, signup and product flows, dashboards on a
-        real database and the integrations you depend on. Some projects start at a sharp
-        site and waitlist. Others run through billing, accounts, and full app UI. Scope
-        drives timeline and cost, and we align early so “done” isn’t ambiguous.
+        real database and the integrations you actually wire in. We’ve shipped sharp
+        marketing sites with waitlists. We’ve also run the full loop: accounts, billing,
+        authenticated app UI. Timeline and price track scope; we write down where the line
+        is before the repo gets busy.
       </>
     ),
   },
@@ -32,11 +33,11 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
     heading: "Frontend",
     body: (
       <>
-        We ship interfaces with <Out href="https://nextjs.org">Next.js</Out> and{" "}
-        <Out href="https://react.dev">React</Out>, from marketing sites to the full
-        authenticated product. Mobile matters by default: solid layouts, coherent
-        interactions, and a clean runtime (no console errors hand-waved away). Brand
-        color lands in type and accents, present but not loud.
+        Interfaces in <Out href="https://nextjs.org">Next.js</Out> and{" "}
+        <Out href="https://react.dev">React</Out>. Marketing pages through logged-in
+        product. Layouts have to read on a phone without inventing a second layout
+        system. We burn down the console warnings we introduced before the repo changes
+        hands. Brand color shows up in type and chrome where it earns space.
       </>
     ),
   },
@@ -44,12 +45,13 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
     heading: "Backend",
     body: (
       <>
-        Data and auth usually live on <Out href="https://supabase.com">Supabase</Out> or{" "}
-        <Out href="https://firebase.google.com">Firebase</Out>. Quick to ship, easy for you
-        to own. When you outgrow that, we shift toward{" "}
+        Data and auth usually start on <Out href="https://supabase.com">Supabase</Out> or{" "}
+        <Out href="https://firebase.google.com">Firebase</Out>. Fast to stand up; you keep
+        the keys. When load or compliance outgrows that, we move the heavy pieces toward{" "}
         <Out href="https://www.mongodb.com">MongoDB</Out>,{" "}
-        <Out href="https://www.cloudflare.com">Cloudflare</Out>, and similar so scale and
-        compliance keep up without redoing the experience you signed off on.
+        <Out href="https://www.cloudflare.com">Cloudflare</Out>, whatever matches the next
+        constraint. We scope migrations so traffic or compliance don’t corner you into
+        throwing away what already shipped.
       </>
     ),
   },
@@ -57,11 +59,11 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
     heading: "Payment setup",
     body: (
       <>
-        Checkout, subscriptions, and payouts through providers people already trust,
-        mainly <Out href="https://stripe.com">Stripe</Out> or{" "}
-        <Out href="https://www.creem.io">Creem</Out>, plus others when the model needs it.
-        Test and live modes, webhooks, receipts, and the full customer path, wired so you
-        aren’t propping sales up with scripts and manual fixes.
+        Checkout, subscriptions, payouts. <Out href="https://stripe.com">Stripe</Out> and{" "}
+        <Out href="https://www.creem.io">Creem</Out> are the usual anchors; other providers
+        when the business model needs them. Test keys, live keys, webhooks, receipts. The
+        path from “buy” to settled money should run without a human tab-completing CSVs
+        every Friday.
       </>
     ),
   },
@@ -69,9 +71,9 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
     heading: "Logo design",
     body: (
       <>
-        When logo is in scope, we design a mark and word treatment that fits your
-        story, not stock dressed up as custom. Deliverables you can use, plus a short
-        rationale so the brand stays consistent on site, app, and social.
+        When logo is in scope you get a mark and word treatment, vectors, basic lockups,
+        and a short rationale. Enough that the next person dropping it into a site or app
+        store listing isn’t reverse-engineering your taste from a JPEG.
       </>
     ),
   },
@@ -79,9 +81,10 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
     heading: "Branding",
     body: (
       <>
-        We tune how the product should feel (density, motion, hierarchy), especially in
-        dashboards. Full rebrand? We can stress-test names and domains so positioning
-        and visuals tell one story, not two.
+        We dial in how heavy the product reads: density, motion, hierarchy. Dashboards
+        expose weak brand decisions in a week. If you’re renaming or blowing up the
+        visual system, we walk domains, handles, and what shows up in search before
+        anything gets printed or deployed.
       </>
     ),
   },
@@ -89,13 +92,16 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
     heading: "API setup",
     body: (
       <>
-        REST APIs and webhooks with sensible auth, versioning, and errors so partners
-        and background jobs don’t rely on fragile one-offs. For AI, we wire the
-        providers that fit: <Out href="https://platform.openai.com">OpenAI</Out>{" "}
+        REST, webhooks, auth you can rotate, versioning, error payloads that tell someone
+        what broke. Partners and background jobs shouldn’t depend on a curl one-liner
+        nobody documented.
+        <br />
+        <br />
+        For AI we wire what fits: <Out href="https://platform.openai.com">OpenAI</Out>{" "}
         (GPT-class), <Out href="https://www.anthropic.com">Anthropic</Out> (Claude),{" "}
-        <Out href="https://x.ai">xAI</Out> (Grok), and others, chosen for latency, cost,
-        reasoning, and safety. Your product can stay AI-native (summaries, analysis,
-        routing, assistants, automation) instead of a thin chat wrapper.
+        <Out href="https://x.ai">xAI</Out> (Grok), others when latency, bill size,
+        reasoning depth, or guardrails point there. Summaries, classification, routing,
+        assistants, batch jobs, inference wherever the product actually needs it.
       </>
     ),
   },
@@ -103,10 +109,10 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
     heading: "UI/UX Design",
     body: (
       <>
-        Flows, wireframes, and high-fidelity UI before engineering runs away with the
-        budget. Dashboard patterns, empty states, and edge cases get handled on purpose,
-        not after they land in production. Clear hierarchy and interactions so people finish what they
-        came to do. Built to your brief, not wedged into a template.
+        Flows and wireframes land before engineering burns the hours. Dashboard work is
+        empty states, permission holes, the weird Tuesday edge case. Pixel-level UI shows
+        up when sign-off needs real chrome; until then, wireframes carry the risk. Most
+        of the hierarchy lives in forms and tables.
       </>
     ),
     cta: { href: "/work", label: "See our work" },
@@ -116,22 +122,37 @@ export const SERVICE_SECTIONS: ServiceSection[] = [
 export const ABOUT_MEGA_TITLE_LINE1 = "Care";
 export const ABOUT_MEGA_TITLE_LINE2 = "in the craft";
 
-export const ABOUT_SECTIONS: { heading: string; body: string }[] = [
+export const ABOUT_SECTIONS: { heading: string; body: ReactNode }[] = [
   {
     heading: "Small but ambitious",
-    body: "EZEVIO stays small on purpose. Work isn’t bounced through layers. We own scope, design, build, and the quiet checks (auth, billing, rough edges) so a launch doesn’t fall apart the week it goes live.",
+    body: "EZEVIO stays lean. Few handoffs: when we’re responsible, scope, design, and build stay in one thread. Auth edge cases, billing quirks, the rough corners that torch a launch week sit in the same queue as the hero section.",
   },
   {
-    heading: "Picky on purpose",
-    body: "Spacing, copy, broken states, slow paths, edge cases. If it’s off, we fix it instead of shipping around it. Same bar as the services work: product that behaves the way you’d describe it to a friend.",
+    heading: "What we actually fix",
+    body: "Spacing, copy, dead states, slow paths, the third edge case. Obvious broken UI doesn’t ship because a date moved. Console noise gets cleared before handoff. If it’s wrong, we chase it.",
   },
   {
     heading: "Who we work with",
-    body: "No single client type. Startups and small teams with a real problem fit best, especially people who want pushback, follow-through, and something finished, not a file drop. We’re a poor fit when the brief is all vibe and nobody’s named what “done” looks like.",
+    body: "No archetype. Startups and small teams with something to prove are usually the easiest fit; they push back and they need something shippable. Briefs where nobody wrote down what finished means burn calendar for no output.",
   },
   {
     heading: "Outside the desk",
-    body: "Founded & operated by Mahmoud Alhabib. On his own time he trains for marathons, ultras, and other high-endurance events. That means months of early mornings and long days without much room to wing it. He treats client work the same way. Big deliveries need steady blocks of attention, and someone has to stay on the problems after the first pass is “done.”",
+    body: (
+      <>
+        Founded & operated by{" "}
+        <a
+          href="https://www.instagram.com/moe.alhabib/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Mahmoud Alhabib
+        </a>
+        . Training is marathons, ultras, other long-course stuff when the calendar allows.
+        Months where skipping a morning isn’t really an option. Builds get the same
+        stretched timeline: nobody else is waiting to own the week after “we shipped”
+        when real users argue with the spec.
+      </>
+    ),
   },
 ];
 

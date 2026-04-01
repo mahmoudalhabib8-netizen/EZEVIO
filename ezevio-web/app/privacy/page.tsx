@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { InnerPageShell } from "@/components/InnerPageShell";
 import { docTitle } from "@/lib/siteMeta";
 
@@ -45,10 +44,11 @@ export default function PrivacyPage() {
                 Under the GDPR, you may request access to your personal data,
                 ask that it be corrected or erased, or that processing be
                 restricted. You also have the right to data portability and to
-                lodge a complaint with an EU supervisory authority. Questions?
-                Contact{" "}
-                <a href="mailto:hello@ezevio.com">hello@ezevio.com</a>.{" "}
-                <Link href="/">Home</Link>
+                lodge a complaint with an EU supervisory authority.
+              </p>
+              <p>
+                Questions? Contact{" "}
+                <a href="mailto:hello@ezevio.com">hello@ezevio.com</a>.
               </p>
             </div>
           </div>
