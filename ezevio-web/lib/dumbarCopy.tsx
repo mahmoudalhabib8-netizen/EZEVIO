@@ -147,10 +147,10 @@ export const ABOUT_SECTIONS: { heading: string; body: ReactNode }[] = [
         >
           Mahmoud Alhabib
         </a>
-        . Training is marathons, ultras, other long-course stuff when the calendar allows.
-        Months where skipping a morning isn’t really an option. Builds get the same
-        stretched timeline: nobody else is waiting to own the week after “we shipped”
-        when real users argue with the spec.
+        . In his free time he trains for marathons, ultras, and other long-distance
+        events. Mostly early runs and high-mileage weeks when a race is on the calendar.
+        On client projects he stays hands-on after go-live, when the bugs are showing up
+        in production.
       </>
     ),
   },
