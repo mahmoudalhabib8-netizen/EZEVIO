@@ -162,26 +162,32 @@ export const WORK_TILES: {
   title: string;
   /** Art for `/work` index tile (same frame as former gray placeholder). */
   cardImage: string;
+  /** Optional mark centered on the card (e.g. logo on gradient). */
+  cardOverlay?: string;
 }[] = [
   {
     href: "/work/nuerlo",
     title: "NUERLO: AI Course Marketplace",
     cardImage: "/blurry-gradient-nuerlo%20(1).svg",
+    cardOverlay: "/nuerlo-logo.svg",
   },
   {
     href: "/work/tathor",
     title: "TATHOR: AI Business Intelligence",
     cardImage: "/poster-card-tathor.svg",
+    cardOverlay: "/tathor-logo.svg",
+  },
+  {
+    href: "/work/branory",
+    title: "BRANORY: Food & cuisine restaurant",
+    cardImage: "/poster-card-branory-svg.svg",
+    cardOverlay: "/branory-logo.svg",
   },
   {
     href: "/work/class-ace",
     title: "GETACED: Assignment & test prep",
     cardImage: "/project-card-getaced.svg",
-  },
-  {
-    href: "/work/branory",
-    title: "BRANORY: Food & cuisine restaurant",
-    cardImage: "/poster-card-branory.svg.svg",
+    cardOverlay: "/getaced-logo.svg",
   },
 ];
 

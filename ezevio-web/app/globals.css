@@ -1409,6 +1409,23 @@ section.projects .project [data-project-title] a:hover {
   user-select: none;
 }
 
+/* Centered logo/mark on gradient (or similar) cards */
+.t-work .project-link figure img.work-card-overlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(70%, 13.5rem);
+  height: auto;
+  max-height: 56%;
+  aspect-ratio: unset;
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+  background: transparent;
+}
+
 .t-work .project-link figure .videogif {
   width: 100%;
   max-width: 100%;

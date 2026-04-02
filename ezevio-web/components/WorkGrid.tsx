@@ -6,6 +6,7 @@ type Tile = {
   href: string;
   title: string;
   cardImage: string;
+  cardOverlay?: string;
 };
 
 /** Work index: white tile + title on page background. */
@@ -28,6 +29,17 @@ export function WorkGrid({ tiles }: { tiles: readonly Tile[] }) {
                 className="work-card-filler work-card-thumb"
                 draggable={false}
               />
+              {item.cardOverlay ? (
+                <>
+                  {/* eslint-disable-next-line @next/next/no-img-element -- static overlay from /public */}
+                  <img
+                    src={item.cardOverlay}
+                    alt=""
+                    className="work-card-overlay"
+                    draggable={false}
+                  />
+                </>
+              ) : null}
               <figcaption>
                 <span className="figcaption-caption">{item.title}</span>
               </figcaption>
