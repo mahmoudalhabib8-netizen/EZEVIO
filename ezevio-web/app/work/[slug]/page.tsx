@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { InnerPageShell } from "@/components/InnerPageShell";
+import { WorkCaseStudyView } from "@/components/work/WorkCaseStudyView";
 import { getWorkTileBySlug, WORK_TILES } from "@/lib/dumbarCopy";
+import { getWorkCaseStudy } from "@/lib/workCaseStudies";
 import { docTitle } from "@/lib/siteMeta";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -32,6 +34,15 @@ export default async function WorkCasePage({ params }: Props) {
   const { slug } = await params;
   const tile = getWorkTileBySlug(slug);
   if (!tile) notFound();
+
+  const study = getWorkCaseStudy(slug);
+  if (study) {
+    return (
+      <InnerPageShell>
+        <WorkCaseStudyView data={study} />
+      </InnerPageShell>
+    );
+  }
 
   return (
     <InnerPageShell>

@@ -1000,6 +1000,143 @@ section.projects .project [data-project-title] a:hover {
   margin-top: 1.25em;
 }
 
+/*
+ * Work case: studiodumbar.com/work/* style — fixed viewport hero, body scrolls over (sheet).
+ * Reference: https://studiodumbar.com/work/instagram
+ */
+.t-about.work-case {
+  padding-bottom: 40px;
+}
+
+@media only screen and (min-width: 64em) {
+  .t-about.work-case {
+    padding-bottom: 80px;
+  }
+}
+
+/* Scroll-hero: no outer margin/padding — they sit outside the black sheet and show the fixed gray hero through. */
+.t-about.work-case.work-case--scroll-hero {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  background-color: #000000;
+}
+
+.work-case--scroll-hero {
+  position: relative;
+}
+
+.work-case__hero-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.work-case__hero-fixed-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.94;
+}
+
+.work-case__body-sheet {
+  position: relative;
+  z-index: 1;
+  margin-top: 100vh;
+  margin-top: 100dvh;
+  background-color: #000000;
+  /* Clears fixed header when sheet reaches top (matches .t-default). */
+  padding-top: 120px;
+  /* Replaces .t-about margin-bottom + .work-case padding-bottom so the gap isn’t “empty” over the fixed hero. */
+  padding-bottom: 160px;
+}
+
+@media only screen and (min-width: 64em) {
+  .work-case__body-sheet {
+    padding-top: 160px;
+    padding-bottom: 320px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-case--scroll-hero .work-case__hero-fixed {
+    position: relative;
+    height: min(72vh, 640px);
+  }
+
+  .work-case--scroll-hero .work-case__body-sheet {
+    margin-top: 0;
+    padding-top: 120px;
+    padding-bottom: 160px;
+  }
+
+  @media only screen and (min-width: 64em) {
+    .work-case--scroll-hero .work-case__body-sheet {
+      padding-top: 160px;
+      padding-bottom: 320px;
+    }
+  }
+}
+
+/* Same horizontal inset as other .o-grid rows (no full-bleed). */
+.work-case__figure {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  background: #151515;
+  aspect-ratio: 16 / 9;
+}
+
+.work-case__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+/* Two-up: equal columns, symmetric gap, aligned with content grid. */
+.work-case__media-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+
+@media only screen and (min-width: 48em) {
+  .work-case__media-pair {
+    gap: 20px;
+  }
+}
+
+.work-case__media-pair__cell {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-case__media-pair__cell .work-case__figure {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Intro: same right column as SplitSection body; hide empty heading column below xl. */
+@media only screen and (max-width: 1239.98px) {
+  .work-case__intro-spacer {
+    display: none !important;
+  }
+}
+
 /* studiodumbar .t-about / .t-services / .t-jobs typography */
 .t-about,
 .t-services,
