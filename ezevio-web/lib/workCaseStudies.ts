@@ -17,6 +17,8 @@ export type WorkCaseStudyData = {
     WorkCaseMediaSlot,
     WorkCaseMediaSlot,
   ];
+  /** Fixed full-viewport hero before scroll (defaults to gray placeholder if omitted). */
+  heroImage?: string;
 };
 
 const PLACEHOLDER_MEDIA: [
@@ -28,6 +30,7 @@ const PLACEHOLDER_MEDIA: [
 
 export const WORK_CASE_STUDIES: Record<string, WorkCaseStudyData> = {
   tathor: {
+    heroImage: "/work/tathor/tathor-1.png",
     megaLine1: "TATHOR",
     megaLine2: "From signals to decisions",
     servicesLine:

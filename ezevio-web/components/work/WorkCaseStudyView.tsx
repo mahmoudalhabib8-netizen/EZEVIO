@@ -1,4 +1,5 @@
 import { SplitSection } from "@/components/SplitSection";
+import { WorkCaseScrollHeaderReveal } from "@/components/work/WorkCaseScrollHeaderReveal";
 import type { WorkCaseStudyData, WorkCaseMediaSlot } from "@/lib/workCaseStudies";
 
 const PLACEHOLDER = "/work/placeholder-case.svg";
@@ -73,10 +74,11 @@ export function WorkCaseStudyView({ data }: Props) {
 
   return (
     <div className="t-about work-case work-case--scroll-hero">
+      <WorkCaseScrollHeaderReveal />
       <div className="work-case__hero-fixed" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={PLACEHOLDER}
+          src={data.heroImage ?? PLACEHOLDER}
           alt=""
           className="work-case__hero-fixed-img"
           loading="eager"
@@ -84,6 +86,9 @@ export function WorkCaseStudyView({ data }: Props) {
           draggable={false}
         />
       </div>
+
+      {/* In-flow spacer (not margin-top) so layout + scroll math match one viewport — avoids margin collapse. */}
+      <div className="work-case__scroll-gap" aria-hidden />
 
       <div className="work-case__body-sheet o-container">
         <div className="o-grid content">

@@ -39,7 +39,13 @@ jobs:
       # files live at /_next/... → 404, unstyled page).
       - name: Build and export
         working-directory: ezevio-web
+        env:
+          NODE_ENV: production
         run: npm run build
+
+      - name: Verify static export
+        working-directory: ezevio-web
+        run: test -d out && test -f out/index.html && test -d out/_next
 
       # GitHub Pages runs Jekyll unless disabled; Jekyll skips paths starting with _
       # (including _next), so CSS/JS 404 and the site renders unstyled.
