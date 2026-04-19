@@ -35,7 +35,7 @@ export const WORK_CASE_STUDIES: Record<string, WorkCaseStudyData> = {
     servicesLine:
       "Logo design Branding Frontend Backend Stripe Landing Interactive",
     intro:
-      "Teams drown in dashboards that never answer the next question. TATHOR is built to turn operational noise into clear, actionable intelligence—with a product story that reads as serious tooling, not another slide deck. We shaped how that promise lands the first time someone hits the site.",
+      "Teams drown in dashboards that never answer the next question. TATHOR is built to turn scattered operational data into clear, actionable intelligence—with a product story that reads as serious tooling, not another slide deck. We shaped how that promise lands the first time someone hits the site.",
     strategy:
       "The name and mark had to survive favicon scale, investor decks, and in-app chrome. We anchored the story on clarity and velocity: fewer metaphors, more proof. Typography and color stay disciplined so the interface—not the decoration—carries authority.",
     design:

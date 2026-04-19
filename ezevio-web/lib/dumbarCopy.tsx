@@ -125,21 +125,21 @@ export const ABOUT_MEGA_TITLE_LINE2 = "in the craft";
 export const ABOUT_SECTIONS: { heading: string; body: ReactNode }[] = [
   {
     heading: "Small but ambitious",
-    body: "EZEVIO stays lean. Few handoffs: when we’re responsible, scope, design, and build stay in one thread. Auth edge cases, billing quirks, the rough corners that torch a launch week sit in the same queue as the hero section.",
+    body: "EZEVIO is a small studio. When we own a project, scope, design, and engineering stay with the same people so we are not bouncing tickets between rooms. Auth edge cases, billing bugs, and the rough corners that blow up a launch week sit in the same queue as the hero section.",
   },
   {
     heading: "What we actually fix",
-    body: "Spacing, copy, dead states, slow paths, the third edge case. Obvious broken UI doesn’t ship because a date moved. Console noise gets cleared before handoff. If it’s wrong, we chase it.",
+    body: "We fix spacing, copy, dead states, slow paths, and the edge cases that only show up after you have already fixed the first two. We do not ship obvious broken UI because a date moved. We clear stray console warnings before handoff. When something is wrong, we keep working it until it is right.",
   },
   {
     heading: "Who we work with",
-    body: "No archetype. Startups and small teams with something to prove are usually the easiest fit; they push back and they need something shippable. Briefs where nobody wrote down what finished means burn calendar for no output.",
+    body: "There is not one client type. Startups and small teams with something to prove are often the best fit: they push back in a useful way and they need something they can ship. We do poorly when nobody has written down what finished means, because those projects burn time without producing work.",
   },
   {
     heading: "Outside the desk",
     body: (
       <>
-        Founded and operated by{" "}
+        EZEVIO is founded and run by{" "}
         <a
           href="https://www.instagram.com/moe.alhabib/"
           target="_blank"
@@ -147,9 +147,9 @@ export const ABOUT_SECTIONS: { heading: string; body: ReactNode }[] = [
         >
           Mahmoud Alhabib
         </a>
-        . Outside work he trains for marathons and ultras, early mornings, building mileage
-        toward whatever race is next. He treats client projects the same way: still around
-        after launch, not just until the repo changes hands.
+        . Outside work he trains for marathons and ultras, with early mornings and steady
+        mileage toward the next race. He keeps showing up for client projects after launch,
+        not only until the repo changes hands.
       </>
     ),
   },
