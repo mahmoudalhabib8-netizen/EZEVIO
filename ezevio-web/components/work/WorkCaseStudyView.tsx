@@ -1,8 +1,22 @@
 import { SplitSection } from "@/components/SplitSection";
-import { WorkCaseScrollHeaderReveal } from "@/components/work/WorkCaseScrollHeaderReveal";
 import type { WorkCaseStudyData, WorkCaseMediaSlot } from "@/lib/workCaseStudies";
 
 const PLACEHOLDER = "/work/placeholder-case.svg";
+
+/** Keeps mega titles readable at full scale; prefers breaking at a word. */
+const MEGA_LINE_MAX_CHARS = 34;
+
+function shortenMegaLine(line: string, maxChars = MEGA_LINE_MAX_CHARS): string {
+  const t = line.trim();
+  if (t.length <= maxChars) return t;
+  const slice = t.slice(0, maxChars);
+  const lastSpace = slice.lastIndexOf(" ");
+  const cut =
+    lastSpace > Math.floor(maxChars * 0.35)
+      ? slice.slice(0, lastSpace)
+      : slice.trimEnd();
+  return `${cut.trimEnd()}…`;
+}
 
 /** Same column classes as SplitSection `serviceRevealStep={2}` (Strategy / Design / Results). */
 const SPLIT_REST_HEADING =
@@ -73,29 +87,27 @@ export function WorkCaseStudyView({ data }: Props) {
   const [m0, m1, m2, m3] = data.mediaAfter;
 
   return (
-    <div className="t-about work-case work-case--scroll-hero">
-      <WorkCaseScrollHeaderReveal />
-      <div className="work-case__hero-fixed" aria-hidden>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={data.heroImage ?? PLACEHOLDER}
-          alt=""
-          className="work-case__hero-fixed-img"
-          loading="eager"
-          decoding="async"
-          draggable={false}
-        />
-      </div>
-
-      {/* In-flow spacer (not margin-top) so layout + scroll math match one viewport — avoids margin collapse. */}
-      <div className="work-case__scroll-gap" aria-hidden />
-
-      <div className="work-case__body-sheet o-container">
+    <div className="t-default t-about work-case">
+      <div className="o-container">
         <div className="o-grid content">
+          {data.heroImage ? (
+            <div className="work-case__hero o-col-12--md o-col-12">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={data.heroImage}
+                alt=""
+                className="work-case__hero-img"
+                loading="eager"
+                decoding="async"
+                draggable={false}
+              />
+            </div>
+          ) : null}
+
           <div className="mega-title-wrap o-col-12--md o-col-12">
             <h1 className="mega-title" data-aos="topleft-hardscale">
-              {data.megaLine1} —<br />
-              {data.megaLine2}
+              {shortenMegaLine(data.megaLine1)} —<br />
+              {shortenMegaLine(data.megaLine2)}
             </h1>
           </div>
 
