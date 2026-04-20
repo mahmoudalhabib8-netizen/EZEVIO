@@ -1047,6 +1047,20 @@ section.projects .project [data-project-title] a:hover {
   aspect-ratio: 16 / 9;
 }
 
+/* Product / marketing screenshots: fill the content column width, natural height—no letterboxed bars. */
+.work-case__figure--screenshot {
+  aspect-ratio: unset;
+  background: transparent;
+}
+
+.work-case__figure--screenshot .work-case__img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: unset;
+  object-position: unset;
+}
+
 .work-case__img {
   display: block;
   width: 100%;
@@ -1081,6 +1095,23 @@ section.projects .project [data-project-title] a:hover {
 .work-case__media-pair__cell .work-case__figure {
   flex: 1 1 auto;
   min-height: 0;
+}
+
+/* Do not stretch shorter stills to match the taller column (that caused gray filler). */
+.work-case__media-pair__cell .work-case__figure--screenshot {
+  flex: 0 0 auto;
+  min-height: 0;
+  align-self: stretch;
+}
+
+.work-case__media-caption-heading {
+  margin-top: 44px;
+}
+
+@media only screen and (min-width: 64em) {
+  .work-case__media-caption-heading {
+    margin-top: 56px;
+  }
 }
 
 /* Intro: same right column as SplitSection body; hide empty heading column below xl. */

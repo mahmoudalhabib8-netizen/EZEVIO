@@ -1,5 +1,11 @@
 import { SplitSection } from "@/components/SplitSection";
-import type { WorkCaseStudyData, WorkCaseMediaSlot } from "@/lib/workCaseStudies";
+import type {
+  WorkCaseBodyItem,
+  WorkCaseMediaCaption,
+  WorkCaseMediaSlot,
+  WorkCaseStill,
+  WorkCaseStudyData,
+} from "@/lib/workCaseStudies";
 
 const PLACEHOLDER = "/work/placeholder-case.svg";
 
@@ -24,15 +30,27 @@ const SPLIT_REST_HEADING =
 const SPLIT_REST_BODY =
   "o-col-6--xlg u-push-6--xlg o-col-6--md o-col-12 dumbar-col-stack";
 
+/** Matches SplitSection services rows after the first (left title / right body). */
+const SERVICES_REST_HEADING =
+  "o-col-12--xlg u-push-6--xlg o-col-6--md o-col-12 dumbar-col-stack";
+const SERVICES_REST_BODY =
+  "o-col-6--xlg u-push-6--xlg o-col-6--md o-col-12 dumbar-col-stack";
+
 const MEDIA_COL = "o-col-12--md o-col-12 dumbar-col-stack";
 
-function CaseFigure({ alt }: { alt: string }) {
+function CaseStill({ still }: { still?: WorkCaseStill }) {
+  const isAsset = Boolean(still?.src);
   return (
-    <figure className="work-case__figure">
-      {/* eslint-disable-next-line @next/next/no-img-element -- placeholder / future case assets */}
+    <figure
+      className={`work-case__figure${isAsset ? " work-case__figure--screenshot" : ""}`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element -- case study assets */}
       <img
-        src={PLACEHOLDER}
-        alt={alt}
+        src={still?.src ?? PLACEHOLDER}
+        alt={
+          still?.alt ??
+          (isAsset ? "" : "Project still (placeholder)")
+        }
         className="work-case__img"
         loading="lazy"
         decoding="async"
@@ -42,68 +60,137 @@ function CaseFigure({ alt }: { alt: string }) {
   );
 }
 
-function MediaRowTwo() {
+function MediaCaptionBlock({ caption }: { caption: WorkCaseMediaCaption }) {
+  const [a, b] = caption.paragraphs;
+  return (
+    <>
+      <div
+        className={`${SERVICES_REST_HEADING} work-case__media-caption-heading`}
+      >
+        <h3>{caption.title}</h3>
+      </div>
+      <div
+        className={`${SERVICES_REST_BODY} work-case__media-caption-body`}
+      >
+        <p>{a}</p>
+        <p>{b}</p>
+      </div>
+    </>
+  );
+}
+
+function MediaRowTwo({
+  left,
+  right,
+  dataAos,
+  caption,
+}: {
+  left?: WorkCaseStill;
+  right?: WorkCaseStill;
+  dataAos?: string;
+  caption?: WorkCaseMediaCaption;
+}) {
   return (
     <section
       className="o-grid work-case__media-section"
-      data-aos="topleft-hardscale-service-step-1"
+      data-aos={dataAos}
     >
       <div className={MEDIA_COL}>
         <div className="work-case__media-pair">
           <div className="work-case__media-pair__cell">
-            <CaseFigure alt="Project still (placeholder)" />
+            <CaseStill still={left} />
           </div>
           <div className="work-case__media-pair__cell">
-            <CaseFigure alt="Project still (placeholder)" />
+            <CaseStill still={right} />
           </div>
         </div>
       </div>
+      {caption ? <MediaCaptionBlock caption={caption} /> : null}
     </section>
   );
 }
 
-function MediaRowFull() {
+function MediaRowFull({
+  still,
+  dataAos,
+  caption,
+}: {
+  still?: WorkCaseStill;
+  dataAos?: string;
+  caption?: WorkCaseMediaCaption;
+}) {
   return (
     <section
       className="o-grid work-case__media-section"
-      data-aos="topleft-hardscale-service-step-2"
+      data-aos={dataAos}
     >
       <div className={MEDIA_COL}>
-        <CaseFigure alt="Project still (placeholder)" />
+        <CaseStill still={still} />
       </div>
+      {caption ? <MediaCaptionBlock caption={caption} /> : null}
     </section>
   );
 }
 
 function MediaSlot({ slot }: { slot: WorkCaseMediaSlot }) {
-  if (slot === "full") return <MediaRowFull />;
-  if (slot === "half") return <MediaRowTwo />;
+  if (slot === "full")
+    return <MediaRowFull dataAos="topleft-hardscale-service-step-2" />;
+  if (slot === "half")
+    return <MediaRowTwo dataAos="topleft-hardscale-service-step-1" />;
   return null;
+}
+
+function CaseBodyList({ items }: { items: WorkCaseBodyItem[] }) {
+  return (
+    <>
+      {items.map((item, i) => {
+        const dataAos =
+          i % 2 === 0
+            ? "topleft-hardscale-service-step-1"
+            : "topleft-hardscale-service-step-2";
+        if (item.type === "split") {
+          return (
+            <SplitSection
+              key={`split-${i}`}
+              section={{ heading: item.heading, body: item.body }}
+              serviceRevealStep={item.serviceRevealStep ?? 2}
+            />
+          );
+        }
+        if (item.type === "media-half") {
+          return (
+            <MediaRowTwo
+              key={`half-${i}`}
+              left={item.left}
+              right={item.right}
+              dataAos={dataAos}
+              caption={item.caption}
+            />
+          );
+        }
+        return (
+          <MediaRowFull
+            key={`full-${i}`}
+            still={{ src: item.src, alt: item.alt }}
+            dataAos={dataAos}
+            caption={item.caption}
+          />
+        );
+      })}
+    </>
+  );
 }
 
 type Props = { data: WorkCaseStudyData };
 
 export function WorkCaseStudyView({ data }: Props) {
   const [m0, m1, m2, m3] = data.mediaAfter;
+  const useCaseBody = Boolean(data.caseBody?.length);
 
   return (
     <div className="t-default t-about work-case">
       <div className="o-container">
         <div className="o-grid content">
-          {data.heroImage ? (
-            <div className="work-case__hero o-col-12--md o-col-12">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={data.heroImage}
-                alt=""
-                className="work-case__hero-img"
-                loading="eager"
-                decoding="async"
-                draggable={false}
-              />
-            </div>
-          ) : null}
-
           <div className="mega-title-wrap o-col-12--md o-col-12">
             <h1 className="mega-title" data-aos="topleft-hardscale">
               {shortenMegaLine(data.megaLine1)} —<br />
@@ -132,28 +219,39 @@ export function WorkCaseStudyView({ data }: Props) {
             </div>
           </section>
 
-          <MediaSlot slot={m0} />
+          {data.heroImage ? (
+            <MediaRowFull
+              still={{ src: data.heroImage, alt: "" }}
+              dataAos="topleft-hardscale-service-step-2"
+            />
+          ) : null}
+
+          {useCaseBody && data.caseBody ? (
+            <CaseBodyList items={data.caseBody} />
+          ) : (
+            <MediaSlot slot={m0} />
+          )}
 
           <SplitSection
             section={{ heading: "Strategy", body: data.strategy }}
             serviceRevealStep={2}
           />
 
-          <MediaSlot slot={m1} />
+          {useCaseBody ? null : <MediaSlot slot={m1} />}
 
           <SplitSection
             section={{ heading: "Design", body: data.design }}
             serviceRevealStep={2}
           />
 
-          <MediaSlot slot={m2} />
+          {useCaseBody ? null : <MediaSlot slot={m2} />}
 
           <SplitSection
             section={{ heading: "Results", body: data.results }}
             serviceRevealStep={2}
           />
 
-          <MediaSlot slot={m3} />
+          {useCaseBody ? null : <MediaSlot slot={m3} />}
         </div>
       </div>
     </div>
